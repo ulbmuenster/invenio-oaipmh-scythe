@@ -133,7 +133,29 @@ unfixable = [
 ]
 
 [tool.ruff.isort]
-known-first-party = ["oaipmh-scythe"]
+known-first-party = ["oaipmh_scythe"]
+
+# pytest
+# Ref: https://docs.pytest.org/en/stable/customize.html
+# ------------------------------------------------------------------------------
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+
+# coverage.py
+# Ref: https://coverage.readthedocs.io/en/latest/config.html
+# ------------------------------------------------------------------------------
+
+[tool.coverage.run]
+branch = true
+parallel = true
+source = ["oaipmh_scythe"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "if TYPE_CHECKING:",
+]
+skip_empty = true
 
 # licensecheck
 # Ref: https://github.com/FHPythonUtils/LicenseCheck/#example-1-pyprojecttoml
