@@ -1,52 +1,61 @@
-Sickle: OAI-PMH for Humans
-==========================
+# oaipmh-scythe: OAI-PMH for Humans
 
-.. image:: https://travis-ci.org/mloesch/sickle.svg?branch=master
-    :target: https://travis-ci.org/mloesch/sickle
-.. image:: https://img.shields.io/pypi/v/Sickle.svg
-    :target: https://pypi.python.org/pypi/Sickle
-.. image:: https://img.shields.io/pypi/dm/sickle.svg
-        :target: https://pypi.python.org/pypi/Sickle
+This is a community maintained fork of the original [sickle](https://github.com/mloesch/sickle).
 
-Sickle is a lightweight `OAI-PMH <http://www.openarchives.org/OAI/openarchivesprotocol.html>`_
-client library written in Python.  It has been designed for conveniently retrieving data from
-OAI interfaces the Pythonic way::
+|     |     |
+| --- | --- |
+| Meta | [![hatch][hatch-badge]][hatch] [![pre-commit enabled][pre-commit-badge]][pre-commit] [![ruff][ruff-badge]][ruff] [![black][black-badge]][black] |
 
-    >>> from sickle import Sickle
-    >>> sickle = Sickle('http://elis.da.ulcc.ac.uk/cgi/oai2')
-    >>> records = sickle.ListRecords(metadataPrefix='oai_dc')
-    >>> records.next()
-    <Record oai:eprints.rclis.org:4088>
+oaipmh-scythe is a lightweight [OAI-PMH](http://www.openarchives.org/OAI/openarchivesprotocol.html)
+client library written in Python. It has been designed for conveniently retrieving data from OAI interfaces the Pythonic way:
 
-Features
---------
+```pycon
+>>> from oaipmh_scythe import Scythe
+>>> scythe = Scythe("https://zenodo.org/oai2d")
+>>> records = scythe.list_records(metadataPrefix="oai_dc")
+>>> records.next()
+<Record oai:zenodo.org:4574771>
+```
+
+## Features
 
 - Easy harvesting of OAI-compliant interfaces
 - Support for all six OAI verbs
-- Convenient object representations of OAI items (records, headers, sets, ...)
-- Automatic de-serialization of Dublin Core-encoded metadata payloads to Python
-  dictionaries
+- Convenient object representations of OAI items (records, headers, sets, \...)
+- Automatic de-serialization of Dublin Core-encoded metadata payloads to Python dictionaries
 - Option for ignoring deleted items
 
-Installation
-------------
+## Requirements
 
-::
+[Python](https://www.python.org/downloads/) >= 3.8
 
-    pip install sickle
+## Installation
 
-Dependencies:
+```console
+python -m pip install oaipmh-scythe
+```
 
-* `requests <http://docs.python-requests.org/en/latest/>`_
-* `lxml <http://lxml.de/>`_
+## Documentation
 
+The [documentation](https://afuetterer.github.io/oaipmh-scythe) is made with [Material for MkDocs](https://github.com/squidfunk/mkdocs-material) and is hosted by [GitHub Pages](https://docs.github.com/en/pages).
 
-Documentation
--------------
+## License
 
-Documentation is available at `Read the Docs <https://sickle.readthedocs.org/en/latest/>`_
+oaipmh-scythe is distributed under the terms of the [BSD](https://spdx.org/licenses/BSD-3-Clause.html) license.
 
-Development
------------
-
-* `Sickle @ GitHub <https://github.com/mloesch/sickle>`_
+<!-- Markdown links -->
+<!-- dynamic -->
+[ci-workflow]: https://github.com/afuetterer/oaipmh-scythe/actions/workflows/main.yml
+[ci-badge]: https://github.com/afuetterer/oaipmh-scythe/actions/workflows/main.yml/badge.svg
+<!-- static -->
+[license]: https://opensource.org/licenses/MIT
+[black]: https://github.com/psf/black
+[black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
+[hatch]: https://github.com/pypa/hatch
+[hatch-badge]: https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg
+[pre-commit]: https://pre-commit.com/
+[pre-commit-badge]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
+[ruff]: https://github.com/charliermarsh/ruff
+[ruff-badge]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json
+[test-pypi]: https://test.pypi.org/
+[pip]: https://pip.pypa.io/
