@@ -1,6 +1,5 @@
 [project]
 name = "oaipmh-scythe"
-version = "0.7.0"
 description = "A lightweight OAI client library for Python."
 readme = "README.md"
 keywords = [
@@ -31,6 +30,7 @@ dependencies = [
   "requests",
   "lxml~=4.9",
 ]
+dynamic = ["version"]
 
 [project.optional-dependencies]
 docs = [
@@ -61,6 +61,10 @@ repository = "https://github.com/afuetterer/oaipmh-scythe.git"
 build-backend = "hatchling.build"
 requires = ["hatchling"]
 
+# hatch
+# Ref: https://hatch.pypa.io/latest/config/metadata/
+# ------------------------------------------------------------------------------
+
 [tool.hatch.build.targets.sdist]
 exclude = [
   "/.github",
@@ -70,9 +74,8 @@ exclude = [
 [tool.hatch.build.targets.wheel]
 packages = ["src/oaipmh_scythe"]
 
-# hatch
-# Ref: https://hatch.pypa.io/latest/config/metadata/
-# ------------------------------------------------------------------------------
+[tool.hatch.version]
+path = "src/oaipmh_scythe/__init__.py"
 
 [tool.hatch.envs.default]
 features = [

@@ -1,14 +1,15 @@
-"""
-    oaipmh_scythe
-    ~~~~~~
+# SPDX-FileCopyrightText: 2015 Mathias Loesch
+#
+# SPDX-License-Identifier: BSD-3-Clause
 
-    OAI-PMH for Humans.
+"""scythe. OAI-PMH for Humans."""
 
-    :copyright: Copyright 2015 Mathias Loesch
-"""
-
-__version__ = "0.7.0"
-
+from oaipmh_scythe.app import Scythe
 from oaipmh_scythe.response import OAIResponse
 
-from .app import Scythe
+__all__ = [
+    "Scythe",
+    "OAIResponse",
+]
+
+__version__ = "0.7.0"
