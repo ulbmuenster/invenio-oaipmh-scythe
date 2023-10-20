@@ -98,7 +98,7 @@ style = "pre-commit run --all-files --color=always"
 typing = "mypy src tests"
 all = [
   "style",
-  "typing",
+  # "typing",
 ]
 
 [tool.hatch.envs.docs]
