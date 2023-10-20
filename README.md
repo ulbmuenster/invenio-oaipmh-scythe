@@ -4,6 +4,7 @@ This is a community maintained fork of the original [sickle](https://github.com/
 
 |     |     |
 | --- | --- |
+| CI | [![ci][ci-badge]][ci-workflow] |
 | Meta | [![hatch][hatch-badge]][hatch] [![pre-commit enabled][pre-commit-badge]][pre-commit] [![ruff][ruff-badge]][ruff] [![black][black-badge]][black] |
 
 oaipmh-scythe is a lightweight [OAI-PMH](http://www.openarchives.org/OAI/openarchivesprotocol.html)
