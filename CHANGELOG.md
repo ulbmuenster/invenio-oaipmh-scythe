@@ -1,102 +1,62 @@
-Changelog
-=========
+# Changelog
 
-Version 0.7.0
--------------
+## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.7.0...main)
 
-May 17, 2020
+- rename project to oaipmh-scythe when forking it from [mloesch/sickle](https://github.com/mloesch/sickle) to [afuetterer/oaipmh-scythe](https://github.com/afuetterer/oaipmh-scythe)
 
-- method for record metadata extraction has been extracted (``Record.get_metadata()``) to make subclassing easier
-  (https://github.com/mloesch/sickle/pull/38)
-- retryable HTTP status codes and default wait time between retries can be customized (https://github.com/mloesch/sickle/issues/21 https://github.com/mloesch/sickle/pull/41)
-- retry logic has been fixed: ``max_retries`` parameter now refers to no. of retries, not counting the initial request anymore
+## [0.7.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.6.5...0.7.0) (2020-05-17)
+
+- method for record metadata extraction has been extracted (`Record.get_metadata()`) to make subclassing easier ([mloesch/sickle#38](https://github.com/mloesch/sickle/pull/38))
+- retryable HTTP status codes and default wait time between retries can be customized ([mloesch/sickle#21](https://github.com/mloesch/sickle/issues/21) [mloesch/sickle#41](https://github.com/mloesch/sickle/pull/41))
+- retry logic has been fixed: `max_retries` parameter now refers to no. of retries, not counting the initial request anymore
 - the default number of HTTP retries has been set to 0 (= no retries)
-- fix for https://github.com/mloesch/sickle/pull/39
+- fix for [mloesch/sickle#39](https://github.com/mloesch/sickle/pull/39)
 
-Version 0.6.5
--------------
+## [0.6.5](https://github.com/afuetterer/oaipmh-scythe/compare/0.6.4...0.6.5) (2020-01-12)
 
-January 12, 2020
+- fix: repr methods where causing an exception on Python 3 ([mloesch/sickle#30](https://github.com/mloesch/sickle/issues/30))
 
-- fix: repr methods where causing an exception on Python 3 (https://github.com/mloesch/sickle/issues/30)
+## [0.6.4](https://github.com/afuetterer/oaipmh-scythe/compare/0.6.3...0.6.4) (2018-10-02)
 
+- fix: resumption token with empty body indicates last response ([mloesch/sickle#25](https://github.com/mloesch/sickle/issues/25))
 
-Version 0.6.4
--------------
-
-October 2, 2018
-
-- fix: resumption token with empty body indicates last response (https://github.com/mloesch/sickle/issues/25)
-
-
-Version 0.6.3
--------------
-
-April 8, 2018
+## [0.6.3](https://github.com/afuetterer/oaipmh-scythe/compare/0.6.2...0.6.3) (2018-04-08)
 
 - fix unicode problems (issues 20 & 22)
 
+## [0.6.2](https://github.com/afuetterer/oaipmh-scythe/compare/v0.6.1...0.6.2) (2017-08-11)
 
-Version 0.6.2
--------------
+- missing datestamp and identifier elements in record header don\'t break harvesting
+- lxml resolve_entities disabled (<http://lxml.de/FAQ.html#how-do-i-use-lxml-safely-as-a-web-service-endpoint>)
 
-August 11, 2017
-
-- missing datestamp and identifier elements in record header don't break harvesting
-- lxml resolve_entities disabled (http://lxml.de/FAQ.html#how-do-i-use-lxml-safely-as-a-web-service-endpoint)
-
-
-Version 0.6.1
--------------
-
-November 13, 2016
+## [0.6.1](https://github.com/afuetterer/oaipmh-scythe/compare/v0.5...v0.6.1) (2016-11-13)
 
 - it is now possible to pass any keyword arguments to requests
 - the encoding used to decode the server response can be overridden
 
-
-Version 0.5
------------
-
-November 12, 2015
+## [0.5](https://github.com/afuetterer/oaipmh-scythe/compare/v0.4...v0.5) (2015-11-12)
 
 - support for Python 3
 - consider resumption tokens with empty tag bodies
 
-
-Version 0.4
------------
-
-May 31, 2015
+## [0.4](https://github.com/afuetterer/oaipmh-scythe/compare/v0.3...v0.4) (2015-05-31)
 
 - bug fix: resumptionToken parameter is exclusive
 - added support for harvesting complete OAI-XML responses
 
-
-Version 0.3
------------
-
-April 17, 2013
+## [0.3](https://github.com/afuetterer/oaipmh-scythe/compare/v0.2...v0.3) (2013-04-17)
 
 - added support for protected OAI interfaces (basic authentication)
 - made class mapping for OAI elements configurable
 - added options for HTTP timeout and max retries
 - added handling of HTTP 503 responses
 
-
-Version 0.2
------------
-
-February 26, 2013
+## 0.2 (2013-02-26)
 
 - OAI items are now represented as their own classes instead of XML elements
 - library raises OAI-specific exceptions
 - made lxml a required dependency
 
-
-Version 0.1
------------
-
-February 20, 2013
+## 0.1 (2013-02-20)
 
 First public release.
