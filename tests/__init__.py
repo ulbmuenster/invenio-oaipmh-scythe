@@ -1,9 +1,9 @@
 # coding: utf-8
 """
-    sickle.tests
+    oaipmh_scythe.tests
     ~~~~~~~~~~~~
 
-    Tests for sickle.
+    Tests for oaipmh_scythe.
 
     :copyright: Copyright 2015 Mathias Loesch
 """

@@ -1,6 +1,6 @@
 # coding: utf-8
 """
-    sickle.response
+    oaipmh_scythe.response
     ~~~~~~~~~~~~~~~
 
     :copyright: Copyright 2015 Mathias Loesch

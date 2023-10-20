@@ -1,6 +1,6 @@
 # coding: utf-8
 """
-    sickle
+    oaipmh_scythe
     ~~~~~~
 
     OAI-PMH for Humans.
@@ -10,5 +10,5 @@
 
 __version__ = '0.7.0'
 
-from sickle.response import OAIResponse
-from .app import Sickle
+from oaipmh_scythe.response import OAIResponse
+from .app import Scythe

@@ -1,6 +1,6 @@
 # coding: utf-8
 """
-    sickle.utils
+    oaipmh_scythe.utils
     ~~~~~~~~~~~~
 
     Collects utility functions.

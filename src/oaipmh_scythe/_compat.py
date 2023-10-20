@@ -1,6 +1,6 @@
 # coding: utf-8
 """
-    sickle._compat
+    oaipmh_scythe._compat
     ~~~~~~~~~~~~~~
 
     Python 2/3 compatibility layer

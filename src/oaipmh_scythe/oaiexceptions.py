@@ -1,6 +1,6 @@
 # coding: utf-8
 """
-    sickle.oaiexceptions
+    oaipmh_scythe.oaiexceptions
     ~~~~~~~~~~~~~~~~~~~~
 
     OAI errors.

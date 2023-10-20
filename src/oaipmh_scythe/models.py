@@ -1,6 +1,6 @@
 # coding: utf-8
 """
-    sickle.models
+    oaipmh_scythe.models
     ~~~~~~~~~~~~~
 
     Collects classes for OAI-specific entities.
@@ -64,10 +64,10 @@ class Identify(OAIItem):
     """Represents an Identify container.
 
     This object differs from the other entities in that is has to be created
-    from a :class:`sickle.response.OAIResponse` instead of an XML element.
+    from a :class:`oaipmh_scythe.response.OAIResponse` instead of an XML element.
 
     :param identify_response: The response for an Identify request.
-    :type identify_response: :class:`sickle.OAIResponse`
+    :type identify_response: :class:`oaipmh_scythe.OAIResponse`
     """
 
     def __init__(self, identify_response):

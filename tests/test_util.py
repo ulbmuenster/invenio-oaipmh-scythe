@@ -1,6 +1,6 @@
 # coding: utf-8
 """
-    sickle.tests.test_util
+    oaipmh_scythe.tests.test_util
     ~~~~~~~~~~~~~~~~~~~~~~
 
     :copyright: Copyright 2015 Mathias Loesch
@@ -9,7 +9,7 @@ from unittest import TestCase
 
 from lxml import etree
 
-from sickle.utils import xml_to_dict
+from oaipmh_scythe.utils import xml_to_dict
 
 
 class TestUtils(TestCase):

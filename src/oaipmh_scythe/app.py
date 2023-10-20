@@ -1,6 +1,6 @@
 # coding: utf-8
 """
-    sickle.app
+    oaipmh_scythe.app
     ~~~~~~~~~~
 
     An OAI-PMH client.
@@ -13,8 +13,8 @@ import time
 
 import requests
 
-from sickle.iterator import BaseOAIIterator, OAIItemIterator
-from sickle.response import OAIResponse
+from oaipmh_scythe.iterator import BaseOAIIterator, OAIItemIterator
+from oaipmh_scythe.response import OAIResponse
 from .models import (Set, Record, Header, MetadataFormat,
                      Identify)
 
@@ -34,13 +34,13 @@ DEFAULT_CLASS_MAP = {
 }
 
 
-class Sickle(object):
+class Scythe(object):
     """Client for harvesting OAI interfaces.
 
     Use it like this::
 
-        >>> sickle = Sickle('http://elis.da.ulcc.ac.uk/cgi/oai2')
-        >>> records = sickle.ListRecords(metadataPrefix='oai_dc')
+        >>> scythe = Scythe('http://elis.da.ulcc.ac.uk/cgi/oai2')
+        >>> records = scythe.ListRecords(metadataPrefix='oai_dc')
         >>> records.next()
         <Record oai:eprints.rclis.org:3780>
 
@@ -51,8 +51,8 @@ class Sickle(object):
     :param protocol_version: The OAI protocol version.
     :type protocol_version: str
     :param iterator: The type of the returned iterator
-           (default: :class:`sickle.iterator.OAIItemIterator`)
-    :param max_retries: Number of retry attempts if an HTTP request fails (default: 0 = request only once). Sickle will
+           (default: :class:`oaipmh_scythe.iterator.OAIItemIterator`)
+    :param max_retries: Number of retry attempts if an HTTP request fails (default: 0 = request only once). Scythe will
                         use the value from the retry-after header (if present) and will wait the specified number of
                         seconds between retries.
     :type max_retries: int
@@ -64,7 +64,7 @@ class Sickle(object):
     :type protocol_version: str
     :param class_mapping: A dictionary that maps OAI verbs to classes representing
                           OAI items. If not provided,
-                          :data:`sickle.app.DEFAULT_CLASS_MAPPING` will be used.
+                          :data:`oaipmh_scythe.app.DEFAULT_CLASS_MAPPING` will be used.
     :type class_mapping: dict
     :param encoding:     Can be used to override the encoding used when decoding
                          the server response. If not specified, `requests` will
@@ -116,7 +116,7 @@ class Sickle(object):
         """Make HTTP requests to the OAI server.
 
         :param kwargs: OAI HTTP parameters.
-        :rtype: :class:`sickle.OAIResponse`
+        :rtype: :class:`oaipmh_scythe.OAIResponse`
         """
         http_response = self._request(kwargs)
         for _ in range(self.max_retries):
@@ -142,7 +142,7 @@ class Sickle(object):
 
         :param ignore_deleted: If set to :obj:`True`, the resulting
                               iterator will skip records flagged as deleted.
-        :rtype: :class:`sickle.iterator.BaseOAIIterator`
+        :rtype: :class:`oaipmh_scythe.iterator.BaseOAIIterator`
         """
         params = kwargs
         params.update({'verb': 'ListRecords'})
@@ -154,7 +154,7 @@ class Sickle(object):
 
         :param ignore_deleted: If set to :obj:`True`, the resulting
                               iterator will skip records flagged as deleted.
-        :rtype: :class:`sickle.iterator.BaseOAIIterator`
+        :rtype: :class:`oaipmh_scythe.iterator.BaseOAIIterator`
         """
         params = kwargs
         params.update({'verb': 'ListIdentifiers'})
@@ -164,7 +164,7 @@ class Sickle(object):
     def ListSets(self, **kwargs):
         """Issue a ListSets request.
 
-        :rtype: :class:`sickle.iterator.BaseOAIIterator`
+        :rtype: :class:`oaipmh_scythe.iterator.BaseOAIIterator`
         """
         params = kwargs
         params.update({'verb': 'ListSets'})
@@ -173,7 +173,7 @@ class Sickle(object):
     def Identify(self):
         """Issue an Identify request.
 
-        :rtype: :class:`sickle.models.Identify`
+        :rtype: :class:`oaipmh_scythe.models.Identify`
         """
         params = {'verb': 'Identify'}
         return Identify(self.harvest(**params))
@@ -188,7 +188,7 @@ class Sickle(object):
     def ListMetadataFormats(self, **kwargs):
         """Issue a ListMetadataFormats request.
 
-        :rtype: :class:`sickle.iterator.BaseOAIIterator`
+        :rtype: :class:`oaipmh_scythe.iterator.BaseOAIIterator`
         """
         params = kwargs
         params.update({'verb': 'ListMetadataFormats'})
