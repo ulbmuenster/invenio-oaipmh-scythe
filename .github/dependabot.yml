@@ -1,0 +1,31 @@
+# dependabot
+# Ref: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+# ------------------------------------------------------------------------------
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: ci
+    open-pull-requests-limit: 10
+    labels:
+    - "type: ci"
+    - "deps: github-actions"
+    groups:
+      github-actions:
+        patterns:
+        - "*"
+
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: build
+      include: scope
+    open-pull-requests-limit: 10
+    labels:
+    - "type: build"
+    - "deps: python"
