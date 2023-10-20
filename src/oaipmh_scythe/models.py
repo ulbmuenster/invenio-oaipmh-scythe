@@ -1,29 +1,25 @@
-"""
-    oaipmh_scythe.models
-    ~~~~~~~~~~~~~
+# SPDX-FileCopyrightText: 2015 Mathias Loesch
+#
+# SPDX-License-Identifier: BSD-3-Clause
 
-    Collects classes for OAI-specific entities.
-
-    :copyright: Copyright 2015 Mathias Loesch
-"""
+from dataclasses import dataclass
 
 from lxml import etree
 
-from ._compat import PY3, to_str
-from .utils import get_namespace, xml_to_dict
+from oaipmh_scythe.utils import get_namespace, xml_to_dict
 
 
+@dataclass
 class ResumptionToken:
     """Represents a resumption token."""
 
-    def __init__(self, token="", cursor="", complete_list_size="", expiration_date=""):
-        self.token = token
-        self.cursor = cursor
-        self.complete_list_size = complete_list_size
-        self.expiration_date = expiration_date
+    token: str = ""
+    cursor: str = ""
+    complete_list_size: str = ""
+    expiration_date: str = ""
 
-    def __repr__(self):
-        return "<ResumptionToken %s>" % self.token
+    def __repr__(self) -> str:
+        return f"<ResumptionToken {self.token}>"
 
 
 class OAIItem:
@@ -34,51 +30,48 @@ class OAIItem:
                      element names in the dictionary representation.
     """
 
-    def __init__(self, xml, strip_ns=True):
-        super(OAIItem, self).__init__()
+    def __init__(self, xml, strip_ns: bool = True) -> None:
+        super().__init__()
 
         #: The original parsed XML
         self.xml = xml
         self._strip_ns = strip_ns
         self._oai_namespace = get_namespace(self.xml)
 
-    def __bytes__(self):
-        return etree.tounicode(self.xml).encode("utf8")
+    def __bytes__(self) -> bytes:
+        return etree.tostring(self.xml, encoding="utf-8")
 
-    def __str__(self):
-        return self.__unicode__() if PY3 else self.__bytes__()
-
-    def __unicode__(self):
-        return etree.tounicode(self.xml)
+    def __str__(self) -> str:
+        return etree.tostring(self.xml, encoding="unicode")
 
     @property
-    def raw(self):
+    def raw(self) -> str:
         """The original XML as unicode."""
-        return etree.tounicode(self.xml)
+        return etree.tostring(self.xml, encoding="unicode")
 
 
 class Identify(OAIItem):
     """Represents an Identify container.
 
     This object differs from the other entities in that is has to be created
-    from a :class:`oaipmh_scythe.response.OAIResponse` instead of an XML element.
+    from a :class:`sickle.response.OAIResponse` instead of an XML element.
 
     :param identify_response: The response for an Identify request.
-    :type identify_response: :class:`oaipmh_scythe.OAIResponse`
+    :type identify_response: :class:`sickle.OAIResponse`
     """
 
-    def __init__(self, identify_response):
-        super(Identify, self).__init__(identify_response.xml, strip_ns=True)
+    def __init__(self, identify_response) -> None:
+        super().__init__(identify_response.xml, strip_ns=True)
         self.xml = self.xml.find(".//" + self._oai_namespace + "Identify")
         self._identify_dict = xml_to_dict(self.xml, strip_ns=True)
         for k, v in self._identify_dict.items():
             setattr(self, k.replace("-", "_"), v[0])
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "<Identify>"
 
     def __iter__(self):
-        return iter(self._identify_dict.items()) if PY3 else self._identify_dict.iteritems()
+        return iter(self._identify_dict.items())
 
 
 class Header(OAIItem):
@@ -88,8 +81,8 @@ class Header(OAIItem):
     :type header_element: :class:`lxml.etree._Element`
     """
 
-    def __init__(self, header_element):
-        super(Header, self).__init__(header_element, strip_ns=True)
+    def __init__(self, header_element) -> None:
+        super().__init__(header_element, strip_ns=True)
         self.deleted = self.xml.attrib.get("status") == "deleted"
         _identifier_element = self.xml.find(self._oai_namespace + "identifier")
         _datestamp_element = self.xml.find(self._oai_namespace + "datestamp")
@@ -98,14 +91,19 @@ class Header(OAIItem):
         self.datestamp = getattr(_datestamp_element, "text", None)
         self.setSpecs = [setSpec.text for setSpec in self.xml.findall(self._oai_namespace + "setSpec")]
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         if self.deleted:
-            return "<Header %s [deleted]>" % self.identifier
-        else:
-            return "<Header %s>" % self.identifier
+            return f"<Header {self.identifier} [deleted]>"
+        return f"<Header {self.identifier}>"
 
     def __iter__(self):
-        return iter([("identifier", self.identifier), ("datestamp", self.datestamp), ("setSpecs", self.setSpecs)])
+        return iter(
+            [
+                ("identifier", self.identifier),
+                ("datestamp", self.datestamp),
+                ("setSpecs", self.setSpecs),
+            ]
+        )
 
 
 class Record(OAIItem):
@@ -117,28 +115,28 @@ class Record(OAIItem):
                      element names.
     """
 
-    def __init__(self, record_element, strip_ns=True):
-        super(Record, self).__init__(record_element, strip_ns=strip_ns)
+    def __init__(self, record_element: etree._Element, strip_ns: bool = True) -> None:
+        super().__init__(record_element, strip_ns=strip_ns)
         self.header = Header(self.xml.find(".//" + self._oai_namespace + "header"))
         self.deleted = self.header.deleted
         if not self.deleted:
             self.metadata = self.get_metadata()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         if self.header.deleted:
-            return "<Record %s [deleted]>" % self.header.identifier
-        else:
-            return "<Record %s>" % self.header.identifier
+            return f"<Record {self.header.identifier} [deleted]>"
+        return f"<Record {self.header.identifier}>"
 
     def __iter__(self):
-        return iter(self.metadata.items()) if PY3 else self.metadata.iteritems()
+        return iter(self.metadata.items())
 
     def get_metadata(self):
         # We want to get record/metadata/<container>/*
         # <container> would be the element ``dc``
         # in the ``oai_dc`` case.
         return xml_to_dict(
-            self.xml.find(".//" + self._oai_namespace + "metadata").getchildren()[0], strip_ns=self._strip_ns
+            self.xml.find(".//" + self._oai_namespace + "metadata").getchildren()[0],
+            strip_ns=self._strip_ns,
         )
 
 
@@ -149,17 +147,17 @@ class Set(OAIItem):
     :type set_element: :class:`lxml.etree._Element`
     """
 
-    def __init__(self, set_element):
-        super(Set, self).__init__(set_element, strip_ns=True)
+    def __init__(self, set_element: etree._Element) -> None:
+        super().__init__(set_element, strip_ns=True)
         self._set_dict = xml_to_dict(self.xml, strip_ns=True)
         for k, v in self._set_dict.items():
             setattr(self, k.replace("-", "_"), v[0])
 
-    def __repr__(self):
-        return "<Set %s>" % to_str(self.setName)
+    def __repr__(self) -> str:
+        return f"<Set {self.setName}>"
 
     def __iter__(self):
-        return iter(self._set_dict.items()) if PY3 else self._set_dict.iteritems()
+        return iter(self._set_dict.items())
 
 
 class MetadataFormat(OAIItem):
@@ -169,15 +167,15 @@ class MetadataFormat(OAIItem):
     :type mdf_element: :class:`lxml.etree._Element`
     """
 
-    def __init__(self, mdf_element):
-        super(MetadataFormat, self).__init__(mdf_element, strip_ns=True)
+    def __init__(self, mdf_element: etree._Element) -> None:
+        super().__init__(mdf_element, strip_ns=True)
         #: The prefix of this format.
         self._mdf_dict = xml_to_dict(self.xml, strip_ns=True)
         for k, v in self._mdf_dict.items():
             setattr(self, k.replace("-", "_"), v[0])
 
-    def __repr__(self):
-        return "<MetadataFormat %s>" % to_str(self.metadataPrefix)
+    def __repr__(self) -> str:
+        return f"<MetadataFormat {self.metadataPrefix}>"
 
     def __iter__(self):
-        return iter(self._mdf_dict.items()) if PY3 else self._mdf_dict.iteritems()
+        return iter(self._mdf_dict.items())

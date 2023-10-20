@@ -1,17 +1,18 @@
-"""
-    oaipmh_scythe.utils
-    ~~~~~~~~~~~~
+# SPDX-FileCopyrightText: 2015 Mathias Loesch
+#
+# SPDX-License-Identifier: BSD-3-Clause
 
-    Collects utility functions.
-
-    :copyright: Copyright 2015 Mathias Loesch
-"""
+from __future__ import annotations
 
 import re
 from collections import defaultdict
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from lxml import etree
 
 
-def get_namespace(element):
+def get_namespace(element: etree._Element) -> str | None:
     """Return the namespace of an XML element.
 
     :param element: An XML element.
@@ -19,17 +20,17 @@ def get_namespace(element):
     return re.search(r"(\{.*\})", element.tag).group(1)
 
 
-def xml_to_dict(tree, paths=None, nsmap=None, strip_ns=False):
+def xml_to_dict(
+    tree: etree._Element, paths: list[str] | None = None, nsmap: dict[str, str] | None = None, strip_ns: bool = False
+):
     """Convert an XML tree to a dictionary.
 
     :param tree: etree Element
-    :type tree: :class:`lxml.etree._Element`
     :param paths: An optional list of XPath expressions applied on the XML tree.
     :type paths: list[basestring]
     :param nsmap: An optional prefix-namespace mapping for conciser spec of paths.
     :type nsmap: dict
     :param strip_ns: Flag for whether to remove the namespaces from the tags.
-    :type strip_ns: bool
     """
     paths = paths or [".//"]
     nsmap = nsmap or {}

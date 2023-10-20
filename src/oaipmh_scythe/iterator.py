@@ -1,14 +1,17 @@
-"""
-    oaipmh_scythe.iterator
-    ~~~~~~~~~~~~~~~
+# SPDX-FileCopyrightText: 2015 Mathias Loesch
+#
+# SPDX-License-Identifier: BSD-3-Clause
 
-    Collects classes for iterating over OAI responses
+from __future__ import annotations
 
-    :copyright: Copyright 2015 Mathias Loesch
-"""
+from typing import TYPE_CHECKING
 
-from oaipmh_scythe import oaiexceptions
+from oaipmh_scythe import exceptions
 from oaipmh_scythe.models import ResumptionToken
+
+if TYPE_CHECKING:
+    from oaipmh_scythe import Scythe
+
 
 # Map OAI verbs to the XML elements
 VERBS_ELEMENTS = {
@@ -22,21 +25,19 @@ VERBS_ELEMENTS = {
 
 
 class BaseOAIIterator:
-    """Iterator over OAI records/identifiers/sets transparently aggregated via
-    OAI-PMH.
+    """Iterator over OAI records/identifiers/sets transparently aggregated via OAI-PMH.
 
     Can be used to conveniently iterate through the records of a repository.
 
-    :param oaipmh_scythe: The Scythe object that issued the first request.
-    :type oaipmh_scythe: :class:`oaipmh_scythe.app.Scythe`
+    :param scythe: The Scythe object that issued the first request.
     :param params: The OAI arguments.
     :type params:  dict
     :param ignore_deleted: Flag for whether to ignore deleted records.
     :type ignore_deleted: bool
     """
 
-    def __init__(self, oaipmh_scythe, params, ignore_deleted=False):
-        self.oaipmh_scythe = oaipmh_scythe
+    def __init__(self, scythe: Scythe, params: dict[str, str], ignore_deleted: bool = False) -> None:
+        self.scythe = scythe
         self.params = params
         self.ignore_deleted = ignore_deleted
         self.verb = self.params.get("verb")
@@ -49,22 +50,23 @@ class BaseOAIIterator:
     def __next__(self):
         return self.next()
 
-    def __repr__(self):
-        return "<%s %s>" % (self.__class__.__name__, self.verb)
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__} {self.verb}>"
 
-    def _get_resumption_token(self):
+    def _get_resumption_token(self) -> ResumptionToken:
         """Extract and store the resumptionToken from the last response."""
-        resumption_token_element = self.oai_response.xml.find(
-            ".//" + self.oaipmh_scythe.oai_namespace + "resumptionToken"
-        )
+        resumption_token_element = self.oai_response.xml.find(".//" + self.scythe.oai_namespace + "resumptionToken")
         if resumption_token_element is None:
             return None
         token = resumption_token_element.text
-        cursor = resumption_token_element.attrib.get("cursor", None)
-        complete_list_size = resumption_token_element.attrib.get("completeListSize", None)
-        expiration_date = resumption_token_element.attrib.get("expirationDate", None)
+        cursor = resumption_token_element.attrib.get("cursor")
+        complete_list_size = resumption_token_element.attrib.get("completeListSize")
+        expiration_date = resumption_token_element.attrib.get("expirationDate")
         resumption_token = ResumptionToken(
-            token=token, cursor=cursor, complete_list_size=complete_list_size, expiration_date=expiration_date
+            token=token,
+            cursor=cursor,
+            complete_list_size=complete_list_size,
+            expiration_date=expiration_date,
         )
         return resumption_token
 
@@ -73,15 +75,15 @@ class BaseOAIIterator:
         params = self.params
         if self.resumption_token:
             params = {"resumptionToken": self.resumption_token.token, "verb": self.verb}
-        self.oai_response = self.oaipmh_scythe.harvest(**params)
-        error = self.oai_response.xml.find(".//" + self.oaipmh_scythe.oai_namespace + "error")
+        self.oai_response = self.scythe.harvest(**params)
+        error = self.oai_response.xml.find(".//" + self.scythe.oai_namespace + "error")
         if error is not None:
             code = error.attrib.get("code", "UNKNOWN")
             description = error.text or ""
             try:
-                raise getattr(oaiexceptions, code[0].upper() + code[1:])(description)
-            except AttributeError:
-                raise oaiexceptions.OAIError(description)
+                raise getattr(exceptions, code[0].upper() + code[1:])(description)
+            except AttributeError as exc:
+                raise exceptions.OAIError(description) from exc
         self.resumption_token = self._get_resumption_token()
 
     def next(self):
@@ -106,27 +108,24 @@ class OAIResponseIterator(BaseOAIIterator):
 
 
 class OAIItemIterator(BaseOAIIterator):
-    """Iterator over OAI records/identifiers/sets transparently aggregated via
-    OAI-PMH.
+    """Iterator over OAI records/identifiers/sets transparently aggregated via OAI-PMH.
 
     Can be used to conveniently iterate through the records of a repository.
 
-    :param oaipmh_scythe: The Scythe object that issued the first request.
-    :type oaipmh_scythe: :class:`oaipmh_scythe.app.Scythe`
+    :param scythe: The Scythe object that issued the first request.
     :param params: The OAI arguments.
     :type params:  dict
     :param ignore_deleted: Flag for whether to ignore deleted records.
-    :type ignore_deleted: bool
     """
 
-    def __init__(self, oaipmh_scythe, params, ignore_deleted=False):
-        self.mapper = oaipmh_scythe.class_mapping[params.get("verb")]
+    def __init__(self, scythe: Scythe, params: dict[str, str], ignore_deleted: bool = False) -> None:
+        self.mapper = scythe.class_mapping[params.get("verb")]
         self.element = VERBS_ELEMENTS[params.get("verb")]
-        super(OAIItemIterator, self).__init__(oaipmh_scythe, params, ignore_deleted)
+        super().__init__(scythe, params, ignore_deleted)
 
     def _next_response(self):
-        super(OAIItemIterator, self)._next_response()
-        self._items = self.oai_response.xml.iterfind(".//" + self.oaipmh_scythe.oai_namespace + self.element)
+        super()._next_response()
+        self._items = self.oai_response.xml.iterfind(".//" + self.scythe.oai_namespace + self.element)
 
     def next(self):
         """Return the next record/header/set."""

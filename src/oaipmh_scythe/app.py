@@ -1,25 +1,27 @@
-"""
-    oaipmh_scythe.app
-    ~~~~~~~~~~
+# SPDX-FileCopyrightText: 2015 Mathias Loesch
+#
+# SPDX-License-Identifier: BSD-3-Clause
 
-    An OAI-PMH client.
+from __future__ import annotations
 
-    :copyright: Copyright 2015 Mathias Loesch
-"""
 import inspect
 import logging
 import time
+import warnings
+from typing import TYPE_CHECKING, Iterable
 
 import requests
 
 from oaipmh_scythe.iterator import BaseOAIIterator, OAIItemIterator
+from oaipmh_scythe.models import Header, Identify, MetadataFormat, OAIItem, Record, Set
 from oaipmh_scythe.response import OAIResponse
 
-from .models import Header, Identify, MetadataFormat, Record, Set
+if TYPE_CHECKING:
+    from requests.models import Response
 
 logger = logging.getLogger(__name__)
 
-OAI_NAMESPACE = "{http://www.openarchives.org/OAI/%s/}"
+OAI_NAMESPACE: str = "{http://www.openarchives.org/OAI/%s/}"
 
 
 # Map OAI verbs to class representations
@@ -36,42 +38,33 @@ DEFAULT_CLASS_MAP = {
 class Scythe:
     """Client for harvesting OAI interfaces.
 
-    Use it like this::
+    Use it like this:
 
-        >>> scythe = Scythe('http://elis.da.ulcc.ac.uk/cgi/oai2')
-        >>> records = scythe.ListRecords(metadataPrefix='oai_dc')
+        >>> scythe = Scythe("https://zenodo.org/oai2d")
+        >>> records = scythe.list_records(metadataPrefix="oai_dc")
         >>> records.next()
-        <Record oai:eprints.rclis.org:3780>
+        <Record oai:zenodo.org:4574771>
 
     :param endpoint: The endpoint of the OAI interface.
-    :type endpoint: str
     :param http_method: Method used for requests (GET or POST, default: GET).
-    :type http_method: str
     :param protocol_version: The OAI protocol version.
-    :type protocol_version: str
     :param iterator: The type of the returned iterator
-           (default: :class:`oaipmh_scythe.iterator.OAIItemIterator`)
-    :param max_retries: Number of retry attempts if an HTTP request fails (default: 0 = request only once). Scythe will
+           (default: :class:`sickle.iterator.OAIItemIterator`)
+    :param max_retries: Number of retry attempts if an HTTP request fails (default: 0 = request only once). Sickle will
                         use the value from the retry-after header (if present) and will wait the specified number of
                         seconds between retries.
-    :type max_retries: int
     :param retry_status_codes: HTTP status codes to retry (default will only retry on 503)
-    :type retry_status_codes: iterable
     :param default_retry_after: default number of seconds to wait between retries in case no retry-after header is found
                                 on the response (defaults to 60 seconds)
-    :type default_retry_after: int
-    :type protocol_version: str
     :param class_mapping: A dictionary that maps OAI verbs to classes representing
                           OAI items. If not provided,
-                          :data:`oaipmh_scythe.app.DEFAULT_CLASS_MAPPING` will be used.
-    :type class_mapping: dict
+                          :data:`sickle.app.DEFAULT_CLASS_MAPPING` will be used.
     :param encoding:     Can be used to override the encoding used when decoding
                          the server response. If not specified, `requests` will
                          use the encoding returned by the server in the
                          `content-type` header. However, if the `charset`
                          information is missing, `requests` will fallback to
                          `'ISO-8859-1'`.
-    :type encoding:      str
     :param request_args: Arguments to be passed to requests when issuing HTTP
                          requests. Useful examples are `auth=('username', 'password')`
                          for basic auth-protected endpoints or `timeout=<int>`.
@@ -81,21 +74,22 @@ class Scythe:
 
     def __init__(
         self,
-        endpoint,
-        http_method="GET",
-        protocol_version="2.0",
-        iterator=OAIItemIterator,
-        max_retries=0,
-        retry_status_codes=None,
-        default_retry_after=60,
-        class_mapping=None,
-        encoding=None,
-        **request_args,
+        endpoint: str,
+        http_method: str = "GET",
+        protocol_version: str = "2.0",
+        iterator: BaseOAIIterator = OAIItemIterator,
+        max_retries: int = 0,
+        retry_status_codes: Iterable[int] | None = None,
+        default_retry_after: int = 60,
+        class_mapping: dict[str, OAIItem] | None = None,
+        encoding: str | None = None,
+        timeout: int = 60,
+        **request_args: str,
     ):
         self.endpoint = endpoint
-        if http_method not in ["GET", "POST"]:
+        if http_method not in ("GET", "POST"):
             raise ValueError("Invalid HTTP method: %s! Must be GET or POST.")
-        if protocol_version not in ["2.0", "1.0"]:
+        if protocol_version not in ("2.0", "1.0"):
             raise ValueError("Invalid protocol version: %s! Must be 1.0 or 2.0.")
         self.http_method = http_method
         self.protocol_version = protocol_version
@@ -104,18 +98,18 @@ class Scythe:
         else:
             raise TypeError("Argument 'iterator' must be subclass of %s" % BaseOAIIterator.__name__)
         self.max_retries = max_retries
-        self.retry_status_codes = retry_status_codes or [503]
+        self.retry_status_codes = retry_status_codes or (503,)
         self.default_retry_after = default_retry_after
         self.oai_namespace = OAI_NAMESPACE % self.protocol_version
         self.class_mapping = class_mapping or DEFAULT_CLASS_MAP
         self.encoding = encoding
+        self.timeout = timeout
         self.request_args = request_args
 
-    def harvest(self, **kwargs):  # pragma: no cover
+    def harvest(self, **kwargs: str) -> OAIResponse:
         """Make HTTP requests to the OAI server.
 
         :param kwargs: OAI HTTP parameters.
-        :rtype: :class:`oaipmh_scythe.OAIResponse`
         """
         http_response = self._request(kwargs)
         for _ in range(self.max_retries):
@@ -129,68 +123,82 @@ class Scythe:
             http_response.encoding = self.encoding
         return OAIResponse(http_response, params=kwargs)
 
-    def _request(self, kwargs):
+    def _request(self, kwargs: str) -> Response:
         if self.http_method == "GET":
-            return requests.get(self.endpoint, params=kwargs, **self.request_args)
-        return requests.post(self.endpoint, data=kwargs, **self.request_args)
+            return requests.get(self.endpoint, timeout=self.timeout, params=kwargs, **self.request_args)
+        return requests.post(self.endpoint, data=kwargs, timeout=self.timeout, **self.request_args)
 
-    def ListRecords(self, ignore_deleted=False, **kwargs):
+    def list_records(self, ignore_deleted: bool = False, **kwargs: str) -> BaseOAIIterator:
         """Issue a ListRecords request.
 
         :param ignore_deleted: If set to :obj:`True`, the resulting
                               iterator will skip records flagged as deleted.
-        :rtype: :class:`oaipmh_scythe.iterator.BaseOAIIterator`
         """
         params = kwargs
         params.update({"verb": "ListRecords"})
-        # noinspection PyCallingNonCallable
         return self.iterator(self, params, ignore_deleted=ignore_deleted)
 
-    def ListIdentifiers(self, ignore_deleted=False, **kwargs):
+    def list_identifiers(self, ignore_deleted: bool = False, **kwargs: str) -> BaseOAIIterator:
         """Issue a ListIdentifiers request.
 
         :param ignore_deleted: If set to :obj:`True`, the resulting
                               iterator will skip records flagged as deleted.
-        :rtype: :class:`oaipmh_scythe.iterator.BaseOAIIterator`
         """
         params = kwargs
         params.update({"verb": "ListIdentifiers"})
         return self.iterator(self, params, ignore_deleted=ignore_deleted)
 
-    def ListSets(self, **kwargs):
-        """Issue a ListSets request.
-
-        :rtype: :class:`oaipmh_scythe.iterator.BaseOAIIterator`
-        """
+    def list_sets(self, **kwargs: str) -> BaseOAIIterator:
+        """Issue a ListSets request."""
         params = kwargs
         params.update({"verb": "ListSets"})
         return self.iterator(self, params)
 
-    def Identify(self):
-        """Issue an Identify request.
-
-        :rtype: :class:`oaipmh_scythe.models.Identify`
-        """
+    def identify(self) -> Identify:
+        """Issue an Identify request."""
         params = {"verb": "Identify"}
         return Identify(self.harvest(**params))
 
-    def GetRecord(self, **kwargs):
-        """Issue a ListSets request."""
+    def get_record(self, **kwargs: str) -> Record:
+        """Issue a GetRecord request."""
         params = kwargs
         params.update({"verb": "GetRecord"})
         record = self.iterator(self, params).next()
         return record
 
-    def ListMetadataFormats(self, **kwargs):
-        """Issue a ListMetadataFormats request.
-
-        :rtype: :class:`oaipmh_scythe.iterator.BaseOAIIterator`
-        """
+    def list_metadataformats(self, **kwargs: str) -> BaseOAIIterator:
+        """Issue a ListMetadataFormats request."""
         params = kwargs
         params.update({"verb": "ListMetadataFormats"})
         return self.iterator(self, params)
 
-    def get_retry_after(self, http_response):
+    def ListRecords(self, ignore_deleted: bool = False, **kwargs: str) -> BaseOAIIterator:
+        warnings.warn("ListRecords is deprecated, use list_records instead", DeprecationWarning, stacklevel=2)
+        return self.list_records(ignore_deleted, **kwargs)
+
+    def ListIdentifiers(self, ignore_deleted: bool = False, **kwargs: str) -> BaseOAIIterator:
+        warnings.warn("ListIdentifiers is deprecated, use list_identifiers instead", DeprecationWarning, stacklevel=2)
+        return self.list_identifiers(ignore_deleted, **kwargs)
+
+    def ListSets(self, **kwargs: str) -> BaseOAIIterator:
+        warnings.warn("ListSets is deprecated, use list_sets instead", DeprecationWarning, stacklevel=2)
+        return self.list_sets(**kwargs)
+
+    def Identify(self) -> Identify:
+        warnings.warn("Identify is deprecated, use identify instead", DeprecationWarning, stacklevel=2)
+        return self.identify()
+
+    def GetRecord(self, **kwargs: str) -> Record:
+        warnings.warn("GetRecord is deprecated, use get_record instead", DeprecationWarning, stacklevel=2)
+        return self.get_record(**kwargs)
+
+    def ListMetadataFormats(self, **kwargs: str) -> BaseOAIIterator:
+        warnings.warn(
+            "ListMetadataFormats is deprecated, use list_metadataformats instead", DeprecationWarning, stacklevel=2
+        )
+        return self.list_metadataformats(**kwargs)
+
+    def get_retry_after(self, http_response: Response) -> int:
         if http_response.status_code == 503:
             try:
                 return int(http_response.headers.get("retry-after"))
@@ -199,5 +207,5 @@ class Scythe:
         return self.default_retry_after
 
     @staticmethod
-    def _is_error_code(status_code):
+    def _is_error_code(status_code: int) -> bool:
         return status_code >= 400
