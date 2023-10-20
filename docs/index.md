@@ -45,4 +45,3 @@ Table of Contents
    customizing
    development
    credits
-

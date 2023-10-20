@@ -130,4 +130,3 @@ the returned :class:`~sickle.iterator.OAIItemIterator` will skip deleted records
     This works only using the :class:`sickle.iterator.OAIItemIterator`. If you
     use the :class:`sickle.iterator.OAIResponseIterator`, the resulting OAI
     responses will still contain the deleted records.
-

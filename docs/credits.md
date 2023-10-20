@@ -8,4 +8,3 @@ Credits
   by Pedro Arilla and
   `public domain image <http://commons.wikimedia.org/wiki/File:Sickle_(PSF).png>`_
   by Pearson Scott Foresman.
-

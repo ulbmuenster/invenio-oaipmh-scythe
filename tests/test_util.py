@@ -1,4 +1,3 @@
-# coding: utf-8
 """
     oaipmh_scythe.tests.test_util
     ~~~~~~~~~~~~~~~~~~~~~~
@@ -8,7 +7,6 @@
 from unittest import TestCase
 
 from lxml import etree
-
 from oaipmh_scythe.utils import xml_to_dict
 
 
@@ -23,6 +21,4 @@ class TestUtils(TestCase):
     <d/>
 </root>"""
 
-        self.assertEqual(xml_to_dict(etree.XML(xml)),
-                         dict(a=['One'], b=['Two'], c=['Three', 'Four'],
-                              d=[None]))
+        self.assertEqual(xml_to_dict(etree.XML(xml)), dict(a=["One"], b=["Two"], c=["Three", "Four"], d=[None]))

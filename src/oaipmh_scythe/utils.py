@@ -1,4 +1,3 @@
-# coding: utf-8
 """
     oaipmh_scythe.utils
     ~~~~~~~~~~~~
@@ -17,7 +16,7 @@ def get_namespace(element):
 
     :param element: An XML element.
     """
-    return re.search('(\{.*\})', element.tag).group(1)
+    return re.search(r"(\{.*\})", element.tag).group(1)
 
 
 def xml_to_dict(tree, paths=None, nsmap=None, strip_ns=False):
@@ -32,13 +31,12 @@ def xml_to_dict(tree, paths=None, nsmap=None, strip_ns=False):
     :param strip_ns: Flag for whether to remove the namespaces from the tags.
     :type strip_ns: bool
     """
-    paths = paths or ['.//']
+    paths = paths or [".//"]
     nsmap = nsmap or {}
     fields = defaultdict(list)
     for path in paths:
         elements = tree.findall(path, nsmap)
         for element in elements:
-            tag = re.sub(
-                r'\{.*\}', '', element.tag) if strip_ns else element.tag
+            tag = re.sub(r"\{.*\}", "", element.tag) if strip_ns else element.tag
             fields[tag].append(element.text)
     return dict(fields)

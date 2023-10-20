@@ -1,4 +1,3 @@
-# coding: utf-8
 """
     oaipmh_scythe.iterator
     ~~~~~~~~~~~~~~~
@@ -11,19 +10,18 @@
 from oaipmh_scythe import oaiexceptions
 from oaipmh_scythe.models import ResumptionToken
 
-
 # Map OAI verbs to the XML elements
 VERBS_ELEMENTS = {
-    'GetRecord': 'record',
-    'ListRecords': 'record',
-    'ListIdentifiers': 'header',
-    'ListSets': 'set',
-    'ListMetadataFormats': 'metadataFormat',
-    'Identify': 'Identify',
+    "GetRecord": "record",
+    "ListRecords": "record",
+    "ListIdentifiers": "header",
+    "ListSets": "set",
+    "ListMetadataFormats": "metadataFormat",
+    "Identify": "Identify",
 }
 
 
-class BaseOAIIterator(object):
+class BaseOAIIterator:
     """Iterator over OAI records/identifiers/sets transparently aggregated via
     OAI-PMH.
 
@@ -41,7 +39,7 @@ class BaseOAIIterator(object):
         self.oaipmh_scythe = oaipmh_scythe
         self.params = params
         self.ignore_deleted = ignore_deleted
-        self.verb = self.params.get('verb')
+        self.verb = self.params.get("verb")
         self.resumption_token = None
         self._next_response()
 
@@ -52,24 +50,21 @@ class BaseOAIIterator(object):
         return self.next()
 
     def __repr__(self):
-        return '<%s %s>' % (self.__class__.__name__, self.verb)
+        return "<%s %s>" % (self.__class__.__name__, self.verb)
 
     def _get_resumption_token(self):
         """Extract and store the resumptionToken from the last response."""
         resumption_token_element = self.oai_response.xml.find(
-            './/' + self.oaipmh_scythe.oai_namespace + 'resumptionToken')
+            ".//" + self.oaipmh_scythe.oai_namespace + "resumptionToken"
+        )
         if resumption_token_element is None:
             return None
         token = resumption_token_element.text
-        cursor = resumption_token_element.attrib.get('cursor', None)
-        complete_list_size = resumption_token_element.attrib.get(
-            'completeListSize', None)
-        expiration_date = resumption_token_element.attrib.get(
-            'expirationDate', None)
+        cursor = resumption_token_element.attrib.get("cursor", None)
+        complete_list_size = resumption_token_element.attrib.get("completeListSize", None)
+        expiration_date = resumption_token_element.attrib.get("expirationDate", None)
         resumption_token = ResumptionToken(
-            token=token, cursor=cursor,
-            complete_list_size=complete_list_size,
-            expiration_date=expiration_date
+            token=token, cursor=cursor, complete_list_size=complete_list_size, expiration_date=expiration_date
         )
         return resumption_token
 
@@ -77,19 +72,14 @@ class BaseOAIIterator(object):
         """Get the next response from the OAI server."""
         params = self.params
         if self.resumption_token:
-            params = {
-                'resumptionToken': self.resumption_token.token,
-                'verb': self.verb
-            }
+            params = {"resumptionToken": self.resumption_token.token, "verb": self.verb}
         self.oai_response = self.oaipmh_scythe.harvest(**params)
-        error = self.oai_response.xml.find(
-            './/' + self.oaipmh_scythe.oai_namespace + 'error')
+        error = self.oai_response.xml.find(".//" + self.oaipmh_scythe.oai_namespace + "error")
         if error is not None:
-            code = error.attrib.get('code', 'UNKNOWN')
-            description = error.text or ''
+            code = error.attrib.get("code", "UNKNOWN")
+            description = error.text or ""
             try:
-                raise getattr(
-                    oaiexceptions, code[0].upper() + code[1:])(description)
+                raise getattr(oaiexceptions, code[0].upper() + code[1:])(description)
             except AttributeError:
                 raise oaiexceptions.OAIError(description)
         self.resumption_token = self._get_resumption_token()
@@ -130,14 +120,13 @@ class OAIItemIterator(BaseOAIIterator):
     """
 
     def __init__(self, oaipmh_scythe, params, ignore_deleted=False):
-        self.mapper = oaipmh_scythe.class_mapping[params.get('verb')]
-        self.element = VERBS_ELEMENTS[params.get('verb')]
+        self.mapper = oaipmh_scythe.class_mapping[params.get("verb")]
+        self.element = VERBS_ELEMENTS[params.get("verb")]
         super(OAIItemIterator, self).__init__(oaipmh_scythe, params, ignore_deleted)
 
     def _next_response(self):
         super(OAIItemIterator, self)._next_response()
-        self._items = self.oai_response.xml.iterfind(
-            './/' + self.oaipmh_scythe.oai_namespace + self.element)
+        self._items = self.oai_response.xml.iterfind(".//" + self.oaipmh_scythe.oai_namespace + self.element)
 
     def next(self):
         """Return the next record/header/set."""

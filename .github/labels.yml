@@ -9,12 +9,12 @@
 - name: duplicate
   description: This issue or pull request already exists
   color: cfd3d7
-- name: "good first issue"
+- name: good first issue
   description: Good for newcomers
   color: 7057ff
-- name: "help wanted"
+- name: help wanted
   description: Extra attention is needed
-  color: "008672"
+  color: '008672'
 - name: invalid
   description: This doesn't seem right
   color: e4e669
@@ -26,64 +26,64 @@
   color: ffffff
 
 # Status
-- name: "status: abandoned"
-  color: "000000"
-- name: "status: accepted"
-  color: "009800"
-- name: "status: blocked"
+- name: 'status: abandoned'
+  color: '000000'
+- name: 'status: accepted'
+  color: '009800'
+- name: 'status: blocked'
   color: e11d21
-- name: "status: pending"
+- name: 'status: pending'
   color: c5def5
 
 # Type
-- name: "type: bug"
+- name: 'type: bug'
   description: Something isn't working
   color: e11d21
-- name: "type: build"
+- name: 'type: build'
   description: Changes that affect the build system or external dependencies
   color: d4c5f9
-- name: "type: ci"
+- name: 'type: ci'
   description: Continuous Integration
-  color: "000000"
-- name: "type: chore"
+  color: '000000'
+- name: 'type: chore'
   description: Miscellaneous changes (e.g. .gitignore, static files)
   color: cfd3d7
-- name: "type: docs"
+- name: 'type: docs'
   description: Improvements or additions to documentation
   color: 0075ca
-- name: "type: feature"
+- name: 'type: feature'
   description: New feature or request
-  color: "009800"
-- name: "type: performance"
+  color: '009800'
+- name: 'type: performance'
   description: Changes that improve performance
   color: 8fc9e1
-- name: "type: refactor"
+- name: 'type: refactor'
   description: Changes that neither fix a bug nor adds a feature
   color: 326770
-- name: "type: style"
+- name: 'type: style'
   description: Changes that do not affect the meaning of the code (e.g. white-space, formatting)
   color: d59d75
-- name: "type: test"
+- name: 'type: test'
   description: Adding missing tests or correcting existing tests
   color: 1b3081
 
 # Priority
-- name: "priority: low"
-  color: "009800"
-- name: "priority: medium"
+- name: 'priority: low'
+  color: '009800'
+- name: 'priority: medium'
   color: fbca04
-- name: "priority: high"
+- name: 'priority: high'
   color: eb6420
-- name: "priority: critical"
+- name: 'priority: critical'
   color: e11d21
 
 # Dependencies
-- name: "deps: python"
+- name: 'deps: python'
   description: Pull requests that update Python code
   color: 2b67c6
-- name: "deps: github-actions"
+- name: 'deps: github-actions'
   description: Pull requests that update GitHub Actions code
-  color: "000000"
-- name: "deps: pre-commit"
+  color: '000000'
+- name: 'deps: pre-commit'
   description: Pull requests that update pre-commit config code
   color: fbca04

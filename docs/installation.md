@@ -14,5 +14,3 @@ Installation using pip::
 Installation using easy_install::
 
     easy_install sickle
-
-

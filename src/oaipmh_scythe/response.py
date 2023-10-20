@@ -1,4 +1,3 @@
-# coding: utf-8
 """
     oaipmh_scythe.response
     ~~~~~~~~~~~~~~~
@@ -11,7 +10,7 @@ from lxml import etree
 XMLParser = etree.XMLParser(remove_blank_text=True, recover=True, resolve_entities=False)
 
 
-class OAIResponse(object):
+class OAIResponse:
     """A response from an OAI server.
 
     Provides access to the returned data on different abstraction
@@ -34,8 +33,7 @@ class OAIResponse(object):
     @property
     def xml(self):
         """The server's response as parsed XML."""
-        return etree.XML(self.http_response.content,
-                         parser=XMLParser)
+        return etree.XML(self.http_response.content, parser=XMLParser)
 
     def __repr__(self):
-        return '<OAIResponse %s>' % self.params.get('verb')
+        return "<OAIResponse %s>" % self.params.get("verb")

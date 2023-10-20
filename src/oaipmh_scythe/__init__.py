@@ -1,4 +1,3 @@
-# coding: utf-8
 """
     oaipmh_scythe
     ~~~~~~
@@ -8,7 +7,8 @@
     :copyright: Copyright 2015 Mathias Loesch
 """
 
-__version__ = '0.7.0'
+__version__ = "0.7.0"
 
 from oaipmh_scythe.response import OAIResponse
+
 from .app import Scythe

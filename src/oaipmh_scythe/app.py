@@ -1,4 +1,3 @@
-# coding: utf-8
 """
     oaipmh_scythe.app
     ~~~~~~~~~~
@@ -15,26 +14,26 @@ import requests
 
 from oaipmh_scythe.iterator import BaseOAIIterator, OAIItemIterator
 from oaipmh_scythe.response import OAIResponse
-from .models import (Set, Record, Header, MetadataFormat,
-                     Identify)
+
+from .models import Header, Identify, MetadataFormat, Record, Set
 
 logger = logging.getLogger(__name__)
 
-OAI_NAMESPACE = '{http://www.openarchives.org/OAI/%s/}'
+OAI_NAMESPACE = "{http://www.openarchives.org/OAI/%s/}"
 
 
 # Map OAI verbs to class representations
 DEFAULT_CLASS_MAP = {
-    'GetRecord': Record,
-    'ListRecords': Record,
-    'ListIdentifiers': Header,
-    'ListSets': Set,
-    'ListMetadataFormats': MetadataFormat,
-    'Identify': Identify,
+    "GetRecord": Record,
+    "ListRecords": Record,
+    "ListIdentifiers": Header,
+    "ListSets": Set,
+    "ListMetadataFormats": MetadataFormat,
+    "Identify": Identify,
 }
 
 
-class Scythe(object):
+class Scythe:
     """Client for harvesting OAI interfaces.
 
     Use it like this::
@@ -80,30 +79,30 @@ class Scythe(object):
                          for all available parameters.
     """
 
-    def __init__(self, endpoint,
-                 http_method='GET',
-                 protocol_version='2.0',
-                 iterator=OAIItemIterator,
-                 max_retries=0,
-                 retry_status_codes=None,
-                 default_retry_after=60,
-                 class_mapping=None,
-                 encoding=None,
-                 **request_args):
-
+    def __init__(
+        self,
+        endpoint,
+        http_method="GET",
+        protocol_version="2.0",
+        iterator=OAIItemIterator,
+        max_retries=0,
+        retry_status_codes=None,
+        default_retry_after=60,
+        class_mapping=None,
+        encoding=None,
+        **request_args,
+    ):
         self.endpoint = endpoint
-        if http_method not in ['GET', 'POST']:
+        if http_method not in ["GET", "POST"]:
             raise ValueError("Invalid HTTP method: %s! Must be GET or POST.")
-        if protocol_version not in ['2.0', '1.0']:
-            raise ValueError(
-                "Invalid protocol version: %s! Must be 1.0 or 2.0.")
+        if protocol_version not in ["2.0", "1.0"]:
+            raise ValueError("Invalid protocol version: %s! Must be 1.0 or 2.0.")
         self.http_method = http_method
         self.protocol_version = protocol_version
         if inspect.isclass(iterator) and issubclass(iterator, BaseOAIIterator):
             self.iterator = iterator
         else:
-            raise TypeError(
-                "Argument 'iterator' must be subclass of %s" % BaseOAIIterator.__name__)
+            raise TypeError("Argument 'iterator' must be subclass of %s" % BaseOAIIterator.__name__)
         self.max_retries = max_retries
         self.retry_status_codes = retry_status_codes or [503]
         self.default_retry_after = default_retry_after
@@ -120,11 +119,9 @@ class Scythe(object):
         """
         http_response = self._request(kwargs)
         for _ in range(self.max_retries):
-            if self._is_error_code(http_response.status_code) \
-                    and http_response.status_code in self.retry_status_codes:
+            if self._is_error_code(http_response.status_code) and http_response.status_code in self.retry_status_codes:
                 retry_after = self.get_retry_after(http_response)
-                logger.warning(
-                    "HTTP %d! Retrying after %d seconds..." % (http_response.status_code, retry_after))
+                logger.warning("HTTP %d! Retrying after %d seconds..." % (http_response.status_code, retry_after))
                 time.sleep(retry_after)
                 http_response = self._request(kwargs)
         http_response.raise_for_status()
@@ -133,7 +130,7 @@ class Scythe(object):
         return OAIResponse(http_response, params=kwargs)
 
     def _request(self, kwargs):
-        if self.http_method == 'GET':
+        if self.http_method == "GET":
             return requests.get(self.endpoint, params=kwargs, **self.request_args)
         return requests.post(self.endpoint, data=kwargs, **self.request_args)
 
@@ -145,7 +142,7 @@ class Scythe(object):
         :rtype: :class:`oaipmh_scythe.iterator.BaseOAIIterator`
         """
         params = kwargs
-        params.update({'verb': 'ListRecords'})
+        params.update({"verb": "ListRecords"})
         # noinspection PyCallingNonCallable
         return self.iterator(self, params, ignore_deleted=ignore_deleted)
 
@@ -157,9 +154,8 @@ class Scythe(object):
         :rtype: :class:`oaipmh_scythe.iterator.BaseOAIIterator`
         """
         params = kwargs
-        params.update({'verb': 'ListIdentifiers'})
-        return self.iterator(self,
-                             params, ignore_deleted=ignore_deleted)
+        params.update({"verb": "ListIdentifiers"})
+        return self.iterator(self, params, ignore_deleted=ignore_deleted)
 
     def ListSets(self, **kwargs):
         """Issue a ListSets request.
@@ -167,7 +163,7 @@ class Scythe(object):
         :rtype: :class:`oaipmh_scythe.iterator.BaseOAIIterator`
         """
         params = kwargs
-        params.update({'verb': 'ListSets'})
+        params.update({"verb": "ListSets"})
         return self.iterator(self, params)
 
     def Identify(self):
@@ -175,13 +171,13 @@ class Scythe(object):
 
         :rtype: :class:`oaipmh_scythe.models.Identify`
         """
-        params = {'verb': 'Identify'}
+        params = {"verb": "Identify"}
         return Identify(self.harvest(**params))
 
     def GetRecord(self, **kwargs):
         """Issue a ListSets request."""
         params = kwargs
-        params.update({'verb': 'GetRecord'})
+        params.update({"verb": "GetRecord"})
         record = self.iterator(self, params).next()
         return record
 
@@ -191,13 +187,13 @@ class Scythe(object):
         :rtype: :class:`oaipmh_scythe.iterator.BaseOAIIterator`
         """
         params = kwargs
-        params.update({'verb': 'ListMetadataFormats'})
+        params.update({"verb": "ListMetadataFormats"})
         return self.iterator(self, params)
 
     def get_retry_after(self, http_response):
         if http_response.status_code == 503:
             try:
-                return int(http_response.headers.get('retry-after'))
+                return int(http_response.headers.get("retry-after"))
             except TypeError:
                 return self.default_retry_after
         return self.default_retry_after

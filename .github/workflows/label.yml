@@ -3,10 +3,10 @@ name: Label
 on:
   push:
     branches:
-      - main
+    - main
     paths:
-      - .github/labels.yml
-      - .github/workflows/label.yml
+    - .github/labels.yml
+    - .github/workflows/label.yml
   workflow_dispatch:
 
 permissions:
@@ -18,6 +18,6 @@ jobs:
       issues: write
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-      - name: Run GitHub Labeler
-        uses: crazy-max/ghaction-github-labeler@de749cf181958193cb7debf1a9c5bb28922f3e1b # v5.0.0
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11   # v4.1.1
+    - name: Run GitHub Labeler
+      uses: crazy-max/ghaction-github-labeler@de749cf181958193cb7debf1a9c5bb28922f3e1b   # v5.0.0

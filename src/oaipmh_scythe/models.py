@@ -1,4 +1,3 @@
-# coding: utf-8
 """
     oaipmh_scythe.models
     ~~~~~~~~~~~~~
@@ -14,21 +13,20 @@ from ._compat import PY3, to_str
 from .utils import get_namespace, xml_to_dict
 
 
-class ResumptionToken(object):
+class ResumptionToken:
     """Represents a resumption token."""
 
-    def __init__(self, token='', cursor='', complete_list_size='',
-                 expiration_date=''):
+    def __init__(self, token="", cursor="", complete_list_size="", expiration_date=""):
         self.token = token
         self.cursor = cursor
         self.complete_list_size = complete_list_size
         self.expiration_date = expiration_date
 
     def __repr__(self):
-        return '<ResumptionToken %s>' % self.token
+        return "<ResumptionToken %s>" % self.token
 
 
-class OAIItem(object):
+class OAIItem:
     """A generic OAI item.
 
     :param xml: XML representation of the entity.
@@ -43,7 +41,6 @@ class OAIItem(object):
         self.xml = xml
         self._strip_ns = strip_ns
         self._oai_namespace = get_namespace(self.xml)
-
 
     def __bytes__(self):
         return etree.tounicode(self.xml).encode("utf8")
@@ -72,17 +69,16 @@ class Identify(OAIItem):
 
     def __init__(self, identify_response):
         super(Identify, self).__init__(identify_response.xml, strip_ns=True)
-        self.xml = self.xml.find('.//' + self._oai_namespace + 'Identify')
+        self.xml = self.xml.find(".//" + self._oai_namespace + "Identify")
         self._identify_dict = xml_to_dict(self.xml, strip_ns=True)
         for k, v in self._identify_dict.items():
-            setattr(self, k.replace('-', '_'), v[0])
+            setattr(self, k.replace("-", "_"), v[0])
 
     def __repr__(self):
-        return '<Identify>'
+        return "<Identify>"
 
     def __iter__(self):
-        return iter(self._identify_dict.items()) if PY3 else \
-            self._identify_dict.iteritems()
+        return iter(self._identify_dict.items()) if PY3 else self._identify_dict.iteritems()
 
 
 class Header(OAIItem):
@@ -94,27 +90,22 @@ class Header(OAIItem):
 
     def __init__(self, header_element):
         super(Header, self).__init__(header_element, strip_ns=True)
-        self.deleted = self.xml.attrib.get('status') == 'deleted'
-        _identifier_element = self.xml.find(self._oai_namespace + 'identifier')
-        _datestamp_element = self.xml.find(self._oai_namespace + 'datestamp')
+        self.deleted = self.xml.attrib.get("status") == "deleted"
+        _identifier_element = self.xml.find(self._oai_namespace + "identifier")
+        _datestamp_element = self.xml.find(self._oai_namespace + "datestamp")
 
-        self.identifier = getattr(_identifier_element, 'text', None)
-        self.datestamp = getattr(_datestamp_element, 'text', None)
-        self.setSpecs = [setSpec.text for setSpec in
-                         self.xml.findall(self._oai_namespace + 'setSpec')]
+        self.identifier = getattr(_identifier_element, "text", None)
+        self.datestamp = getattr(_datestamp_element, "text", None)
+        self.setSpecs = [setSpec.text for setSpec in self.xml.findall(self._oai_namespace + "setSpec")]
 
     def __repr__(self):
         if self.deleted:
-            return '<Header %s [deleted]>' % self.identifier
+            return "<Header %s [deleted]>" % self.identifier
         else:
-            return '<Header %s>' % self.identifier
+            return "<Header %s>" % self.identifier
 
     def __iter__(self):
-        return iter([
-            ('identifier', self.identifier),
-            ('datestamp', self.datestamp),
-            ('setSpecs', self.setSpecs)
-        ])
+        return iter([("identifier", self.identifier), ("datestamp", self.datestamp), ("setSpecs", self.setSpecs)])
 
 
 class Record(OAIItem):
@@ -128,30 +119,27 @@ class Record(OAIItem):
 
     def __init__(self, record_element, strip_ns=True):
         super(Record, self).__init__(record_element, strip_ns=strip_ns)
-        self.header = Header(self.xml.find(
-            './/' + self._oai_namespace + 'header'))
+        self.header = Header(self.xml.find(".//" + self._oai_namespace + "header"))
         self.deleted = self.header.deleted
         if not self.deleted:
             self.metadata = self.get_metadata()
 
     def __repr__(self):
         if self.header.deleted:
-            return '<Record %s [deleted]>' % self.header.identifier
+            return "<Record %s [deleted]>" % self.header.identifier
         else:
-            return '<Record %s>' % self.header.identifier
+            return "<Record %s>" % self.header.identifier
 
     def __iter__(self):
-        return iter(self.metadata.items()) if PY3 else \
-            self.metadata.iteritems()
+        return iter(self.metadata.items()) if PY3 else self.metadata.iteritems()
 
     def get_metadata(self):
         # We want to get record/metadata/<container>/*
         # <container> would be the element ``dc``
         # in the ``oai_dc`` case.
         return xml_to_dict(
-            self.xml.find(
-                './/' + self._oai_namespace + 'metadata'
-            ).getchildren()[0], strip_ns=self._strip_ns)
+            self.xml.find(".//" + self._oai_namespace + "metadata").getchildren()[0], strip_ns=self._strip_ns
+        )
 
 
 class Set(OAIItem):
@@ -165,14 +153,13 @@ class Set(OAIItem):
         super(Set, self).__init__(set_element, strip_ns=True)
         self._set_dict = xml_to_dict(self.xml, strip_ns=True)
         for k, v in self._set_dict.items():
-            setattr(self, k.replace('-', '_'), v[0])
+            setattr(self, k.replace("-", "_"), v[0])
 
     def __repr__(self):
-        return '<Set %s>' % to_str(self.setName)
+        return "<Set %s>" % to_str(self.setName)
 
     def __iter__(self):
-        return iter(self._set_dict.items()) if PY3 else \
-            self._set_dict.iteritems()
+        return iter(self._set_dict.items()) if PY3 else self._set_dict.iteritems()
 
 
 class MetadataFormat(OAIItem):
@@ -187,11 +174,10 @@ class MetadataFormat(OAIItem):
         #: The prefix of this format.
         self._mdf_dict = xml_to_dict(self.xml, strip_ns=True)
         for k, v in self._mdf_dict.items():
-            setattr(self, k.replace('-', '_'), v[0])
+            setattr(self, k.replace("-", "_"), v[0])
 
     def __repr__(self):
-        return '<MetadataFormat %s>' % to_str(self.metadataPrefix)
+        return "<MetadataFormat %s>" % to_str(self.metadataPrefix)
 
     def __iter__(self):
-        return iter(self._mdf_dict.items()) if PY3 else \
-            self._mdf_dict.iteritems()
+        return iter(self._mdf_dict.items()) if PY3 else self._mdf_dict.iteritems()
