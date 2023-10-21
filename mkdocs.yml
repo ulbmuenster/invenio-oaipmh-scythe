@@ -6,14 +6,21 @@ site_name: oaipmh-scythe
 site_description: oaipmh-scythe
 repo_name: afuetterer/oaipmh-scythe
 repo_url: https://github.com/afuetterer/oaipmh-scythe
-watch: [README.md]
+watch:
+- README.md
+- docs
+- src
 
 nav:
 - Home: index.md
 - Tutorial: tutorial.md
 - OAI-PMH Primer: oaipmh.md
-- API: api.md
 - Harvesting other Metadata Formats than OAI-DC: customizing.md
+- API:
+  - The Scythe Client: api/scythe.md
+  - Working with OAI Responses: api/response.md
+  - Iterating over OAI Items: api/iterator.md
+  - Classes for OAI Items: api/models.md
 - Changelog: changelog.md
 - License: license.md
 
