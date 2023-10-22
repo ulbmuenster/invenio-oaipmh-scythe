@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-"""scythe. OAI-PMH for Humans."""
+"""oaipmh-scythe. OAI-PMH for Humans."""
 
 from oaipmh_scythe.app import Scythe
 from oaipmh_scythe.response import OAIResponse
