@@ -132,6 +132,7 @@ def test_retry_on_custom_code(mocker: MockerFixture, mock_get: MagicMock) -> Non
     assert mock_get.call_count == 4
 
 
+@pytest.mark.filterwarnings("ignore::DeprecationWarning")
 def test_deprecated_methods(harvester: Scythe):
     harvester.Identify()
     harvester.GetRecord()
