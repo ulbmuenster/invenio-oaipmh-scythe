@@ -11,12 +11,12 @@ This is a community maintained fork of the original [sickle](https://github.com/
 oaipmh-scythe is a lightweight [OAI-PMH](http://www.openarchives.org/OAI/openarchivesprotocol.html)
 client library written in Python. It has been designed for conveniently retrieving data from OAI interfaces the Pythonic way:
 
-```pycon
->>> from oaipmh_scythe import Scythe
->>> scythe = Scythe("https://zenodo.org/oai2d")
->>> records = scythe.list_records(metadataPrefix="oai_dc")
->>> records.next()
-<Record oai:zenodo.org:4574771>
+```python
+from oaipmh_scythe import Scythe
+scythe = Scythe("https://zenodo.org/oai2d")
+records = scythe.list_records(metadataPrefix="oai_dc")
+records.next()
+# <Record oai:zenodo.org:4574771>
 ```
 
 ## Features
