@@ -72,7 +72,7 @@ def mock_harvest(*args, **kwargs) -> OAIResponse:
         fake_harvest(verb='ListRecords', error='badArgument')
 
     :param kwargs: OAI arguments that would normally be passed to
-                   :meth:`sickle.app.Sickle.harvest`.
+                   :meth:`sickle.scythe.Sickle.harvest`.
     """
 
     verb = kwargs.get("verb")
@@ -89,10 +89,10 @@ def mock_harvest(*args, **kwargs) -> OAIResponse:
 
 @pytest.fixture
 def harvester(mocker: MockerFixture) -> Scythe:
-    mocker.patch("oaipmh_scythe.app.Scythe.harvest", mock_harvest)
+    mocker.patch("oaipmh_scythe.scythe.Scythe.harvest", mock_harvest)
     return Scythe("https://localhost")
 
 
 @pytest.fixture
 def mock_get(mocker: MockerFixture) -> MagicMock:
-    return mocker.patch("oaipmh_scythe.app.httpx.get")
+    return mocker.patch("oaipmh_scythe.scythe.httpx.get")

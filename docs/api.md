@@ -2,7 +2,7 @@
 
 ## The Scythe Client
 
-::: oaipmh_scythe.app.Scythe
+::: oaipmh_scythe.scythe.Scythe
 
 ## Working with OAI Responses
 

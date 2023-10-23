@@ -58,7 +58,7 @@ class Scythe:
                                 on the response (defaults to 60 seconds)
     :param class_mapping: A dictionary that maps OAI verbs to classes representing
                           OAI items. If not provided,
-                          :data:`sickle.app.DEFAULT_CLASS_MAPPING` will be used.
+                          :data:`sickle.scythe.DEFAULT_CLASS_MAPPING` will be used.
     :param encoding:     Can be used to override the encoding used when decoding
                          the server response. If not specified, `requests` will
                          use the encoding returned by the server in the

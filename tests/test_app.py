@@ -49,7 +49,7 @@ def mock_response_503(mocker: MockerFixture) -> Mock:
 
 @pytest.fixture
 def mock_get(mocker: MockerFixture) -> MagicMock:
-    return mocker.patch("oaipmh_scythe.app.httpx.get")
+    return mocker.patch("oaipmh_scythe.scythe.httpx.get")
 
 
 def test_pass_request_args(mock_get: MagicMock, mock_response_200: Mock) -> None:
@@ -68,7 +68,7 @@ def test_override_encoding(mock_get: MagicMock, mock_response_200: Mock) -> None
 
 
 def test_post_request(mocker: MockerFixture) -> None:
-    mock_post = mocker.patch("oaipmh_scythe.app.httpx.post")
+    mock_post = mocker.patch("oaipmh_scythe.scythe.httpx.post")
     harvester = Scythe("url", encoding="encoding")
     harvester.http_method = "POST"
     params = {"verb": "ListSets"}

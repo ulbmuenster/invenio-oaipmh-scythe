@@ -4,8 +4,8 @@
 
 """oaipmh-scythe. OAI-PMH for Humans."""
 
-from oaipmh_scythe.app import Scythe
 from oaipmh_scythe.response import OAIResponse
+from oaipmh_scythe.scythe import Scythe
 
 __all__ = [
     "Scythe",
