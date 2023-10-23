@@ -6,7 +6,7 @@ This is a community maintained fork of the original [sickle](https://github.com/
 | --- | --- |
 | CI | [![ci][ci-badge]][ci-workflow] |
 | Docs | [![docs][docs-badge]][docs-workflow] |
-| Meta | [![hatch][hatch-badge]][hatch] [![pre-commit enabled][pre-commit-badge]][pre-commit] [![ruff][ruff-badge]][ruff] [![black][black-badge]][black] |
+| Meta | [![hatch][hatch-badge]][hatch] [![pre-commit enabled][pre-commit-badge]][pre-commit] [![ruff][ruff-badge]][ruff] |
 
 oaipmh-scythe is a lightweight [OAI-PMH](http://www.openarchives.org/OAI/openarchivesprotocol.html)
 client library written in Python. It has been designed for conveniently retrieving data from OAI interfaces the Pythonic way:
@@ -58,8 +58,6 @@ oaipmh-scythe is distributed under the terms of the [BSD](https://spdx.org/licen
 [docs-badge]: https://github.com/afuetterer/oaipmh-scythe/actions/workflows/docs.yml/badge.svg
 <!-- static -->
 [license]: https://opensource.org/licenses/MIT
-[black]: https://github.com/psf/black
-[black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
 [hatch]: https://github.com/pypa/hatch
 [hatch-badge]: https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg
 [pre-commit]: https://pre-commit.com/
