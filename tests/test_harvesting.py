@@ -51,7 +51,7 @@ def test_list_sets(harvester: Scythe) -> None:
 
 
 def test_list_metadata_formats(harvester: Scythe) -> None:
-    mdf_iterator = harvester.list_metadataformats()
+    mdf_iterator = harvester.list_metadata_formats()
     mdfs = list(mdf_iterator)
     expected = 5
     assert len(mdfs) == expected

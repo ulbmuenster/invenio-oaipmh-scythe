@@ -166,7 +166,7 @@ class Scythe:
         record = self.iterator(self, params).next()
         return record
 
-    def list_metadataformats(self, **kwargs: str) -> BaseOAIIterator:
+    def list_metadata_formats(self, **kwargs: str) -> BaseOAIIterator:
         """Issue a ListMetadataFormats request."""
         params = kwargs
         params.update({"verb": "ListMetadataFormats"})
@@ -196,7 +196,7 @@ class Scythe:
         warnings.warn(
             "ListMetadataFormats is deprecated, use list_metadataformats instead", DeprecationWarning, stacklevel=2
         )
-        return self.list_metadataformats(**kwargs)
+        return self.list_metadata_formats(**kwargs)
 
     def get_retry_after(self, http_response: Response) -> int:
         if http_response.status_code == 503:
