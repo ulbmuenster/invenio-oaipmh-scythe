@@ -36,6 +36,9 @@
   color: c5def5
 
 # Type
+- name: 'type: breaking'
+  description: Breaking Changes
+  color: bfd4f2
 - name: 'type: bug'
   description: Something isn't working
   color: e11d21
@@ -59,7 +62,7 @@
   color: 8fc9e1
 - name: 'type: refactor'
   description: Changes that neither fix a bug nor adds a feature
-  color: 326770
+  color: '326770'
 - name: 'type: style'
   description: Changes that do not affect the meaning of the code (e.g. white-space, formatting)
   color: d59d75
