@@ -20,10 +20,8 @@ jobs:
   lint:
     uses: ./.github/workflows/lint.yml
   test:
-    needs: lint
     uses: ./.github/workflows/test.yml
   docs:
-    needs: lint
     permissions:
       contents: write
     uses: ./.github/workflows/docs.yml
