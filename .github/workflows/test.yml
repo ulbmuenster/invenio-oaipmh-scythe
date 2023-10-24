@@ -45,7 +45,7 @@ jobs:
       with:
         # GIST_TOKEN is a GitHub personal access token with scope "gist".
         auth: ${{ secrets.GIST_TOKEN }}
-        gistID: a31f257644a9eb5e0a9e375a64914ed5
+        gistID: fcb87d45f4d7defdfeffa65eb1d65f63
         filename: coverage-badge.json
         label: Coverage
         namedLogo: python
@@ -53,10 +53,10 @@ jobs:
         minColorRange: 50
         maxColorRange: 90
         valColorRange: ${{ env.TOTAL_COV }}
-      # only update coverage badge:
+      # only update coverage badge
       # when push to main branch of the project -> not in forks
       if: >-
-        matrix.python-version == '3.12'
+        env.TOTAL_COV
         && github.repository == 'afuetterer/oaipmh-scythe'
         && github.ref == 'refs/heads/main'
 

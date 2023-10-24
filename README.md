@@ -53,7 +53,7 @@ oaipmh-scythe is distributed under the terms of the [BSD](https://spdx.org/licen
 <!-- dynamic -->
 [ci-workflow]: https://github.com/afuetterer/oaipmh-scythe/actions/workflows/main.yml
 [ci-badge]: https://github.com/afuetterer/oaipmh-scythe/actions/workflows/main.yml/badge.svg
-[coverage-badge]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/afuetterer/a31f257644a9eb5e0a9e375a64914ed5/raw/coverage-badge.json
+[coverage-badge]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/afuetterer/fcb87d45f4d7defdfeffa65eb1d65f63/raw/coverage-badge.json
 [docs-url]: https://afuetterer.github.io/oaipmh-scythe
 [docs-workflow]: https://github.com/afuetterer/oaipmh-scythe/actions/workflows/docs.yml
 [docs-badge]: https://github.com/afuetterer/oaipmh-scythe/actions/workflows/docs.yml/badge.svg
