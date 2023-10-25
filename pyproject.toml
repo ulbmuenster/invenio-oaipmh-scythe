@@ -92,7 +92,9 @@ test = "pytest {args:tests}"
 cov = "pytest --cov {args:src}"
 cov-report-markdown = "python -m coverage report --format=markdown > coverage.md"
 cov-summary-json = "python -m coverage json"
-cov-total = """python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])""""
+cov-total = """
+python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])"
+"""
 
 [tool.hatch.envs.lint]
 features = [
