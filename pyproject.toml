@@ -72,9 +72,9 @@ requires = [
 ]
 
 [tool.hatch.build.targets.sdist]
-exclude = [
-  "/.github",
-  "/docs",
+include = [
+  "src",
+  "CHANGELOG.md",
 ]
 
 [tool.hatch.build.targets.wheel]
