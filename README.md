@@ -6,7 +6,7 @@ This is a community maintained fork of the original [sickle](https://github.com/
 | --- | --- |
 | CI | [![ci][ci-badge]][ci-workflow] [![coverage][coverage-badge]][ci-workflow] |
 | Docs | [![docs][docs-badge]][docs-workflow] |
-| Meta | [![hatch][hatch-badge]][hatch] [![pre-commit enabled][pre-commit-badge]][pre-commit] [![ruff][ruff-badge]][ruff] |
+| Meta | [![OpenSSF Scorecard][scorecard-badge]][scorecard-url] [![hatch][hatch-badge]][hatch] [![pre-commit enabled][pre-commit-badge]][pre-commit] [![ruff][ruff-badge]][ruff] |
 
 oaipmh-scythe is a lightweight [OAI-PMH](http://www.openarchives.org/OAI/openarchivesprotocol.html)
 client library written in Python. It has been designed for conveniently retrieving data from OAI interfaces the Pythonic way:
@@ -57,6 +57,8 @@ oaipmh-scythe is distributed under the terms of the [BSD](https://spdx.org/licen
 [docs-url]: https://afuetterer.github.io/oaipmh-scythe
 [docs-workflow]: https://github.com/afuetterer/oaipmh-scythe/actions/workflows/docs.yml
 [docs-badge]: https://github.com/afuetterer/oaipmh-scythe/actions/workflows/docs.yml/badge.svg
+[scorecard-url]: https://securityscorecards.dev/viewer/?uri=github.com/afuetterer/oaipmh-scythe
+[scorecard-badge]: https://api.securityscorecards.dev/projects/github.com/afuetterer/oaipmh-scythe/badge
 <!-- static -->
 [license]: https://opensource.org/licenses/MIT
 [hatch]: https://github.com/pypa/hatch
