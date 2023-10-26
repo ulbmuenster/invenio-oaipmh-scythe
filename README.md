@@ -6,7 +6,7 @@ This is a community maintained fork of the original [sickle](https://github.com/
 | --- | --- |
 | CI | [![ci][ci-badge]][ci-workflow] [![coverage][coverage-badge]][ci-workflow] |
 | Docs | [![docs][docs-badge]][docs-workflow] |
-| Meta | [![OpenSSF Scorecard][scorecard-badge]][scorecard-url] [![hatch][hatch-badge]][hatch] [![pre-commit enabled][pre-commit-badge]][pre-commit] [![ruff][ruff-badge]][ruff] |
+| Meta | [![OpenSSF Scorecard][scorecard-badge]][scorecard-url] [![hatch][hatch-badge]][hatch] [![pre-commit enabled][pre-commit-badge]][pre-commit] [![ruff][ruff-badge]][ruff] [![License][license-badge]][license] |
 
 oaipmh-scythe is a lightweight [OAI-PMH](http://www.openarchives.org/OAI/openarchivesprotocol.html)
 client library written in Python. It has been designed for conveniently retrieving data from OAI interfaces the Pythonic way:
@@ -60,7 +60,8 @@ oaipmh-scythe is distributed under the terms of the [BSD](https://spdx.org/licen
 [scorecard-url]: https://securityscorecards.dev/viewer/?uri=github.com/afuetterer/oaipmh-scythe
 [scorecard-badge]: https://api.securityscorecards.dev/projects/github.com/afuetterer/oaipmh-scythe/badge
 <!-- static -->
-[license]: https://opensource.org/licenses/MIT
+[license]: https://spdx.org/licenses/BSD-3-Clause.html
+[license-badge]: https://img.shields.io/badge/License-BSD_3--Clause-blue.svg
 [hatch]: https://github.com/pypa/hatch
 [hatch-badge]: https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg
 [pre-commit]: https://pre-commit.com/
