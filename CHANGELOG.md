@@ -24,39 +24,39 @@
 
 - fix unicode problems (issues 20 & 22)
 
-## [0.6.2](https://github.com/afuetterer/oaipmh-scythe/compare/v0.6.1...0.6.2) (2017-08-11)
+## [0.6.2](https://github.com/afuetterer/oaipmh-scythe/compare/0.6.1...0.6.2) (2017-08-11)
 
 - missing datestamp and identifier elements in record header don\'t break harvesting
 - lxml resolve_entities disabled (<http://lxml.de/FAQ.html#how-do-i-use-lxml-safely-as-a-web-service-endpoint>)
 
-## [0.6.1](https://github.com/afuetterer/oaipmh-scythe/compare/v0.5...v0.6.1) (2016-11-13)
+## [0.6.1](https://github.com/afuetterer/oaipmh-scythe/compare/0.5.0...0.6.1) (2016-11-13)
 
 - it is now possible to pass any keyword arguments to requests
 - the encoding used to decode the server response can be overridden
 
-## [0.5](https://github.com/afuetterer/oaipmh-scythe/compare/v0.4...v0.5) (2015-11-12)
+## [0.5.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.4.0...0.5.0) (2015-11-12)
 
 - support for Python 3
 - consider resumption tokens with empty tag bodies
 
-## [0.4](https://github.com/afuetterer/oaipmh-scythe/compare/v0.3...v0.4) (2015-05-31)
+## [0.4.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.3.0...0.4.0) (2015-05-31)
 
 - bug fix: resumptionToken parameter is exclusive
 - added support for harvesting complete OAI-XML responses
 
-## [0.3](https://github.com/afuetterer/oaipmh-scythe/compare/v0.2...v0.3) (2013-04-17)
+## [0.3.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.2.0...0.3.0) (2013-04-17)
 
 - added support for protected OAI interfaces (basic authentication)
 - made class mapping for OAI elements configurable
 - added options for HTTP timeout and max retries
 - added handling of HTTP 503 responses
 
-## 0.2 (2013-02-26)
+## 0.2.0 (2013-02-26)
 
 - OAI items are now represented as their own classes instead of XML elements
 - library raises OAI-specific exceptions
 - made lxml a required dependency
 
-## 0.1 (2013-02-20)
+## 0.1.0 (2013-02-20)
 
 First public release.
