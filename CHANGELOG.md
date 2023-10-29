@@ -1,5 +1,7 @@
 # Changelog
 
+All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
+
 ## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.7.0...main)
 
 - rename project to oaipmh-scythe when forking it from [mloesch/sickle](https://github.com/mloesch/sickle) to [afuetterer/oaipmh-scythe](https://github.com/afuetterer/oaipmh-scythe)
