@@ -21,8 +21,7 @@ jobs:
       with:
         python-version: '3.12'
         cache: pip
-    - run: python -m pip install --upgrade pip setuptools wheel
-    - run: python -m pip install --upgrade hatch
+    - run: python -m pip install --constraint=.github/workflows/constraints.txt pip setuptools wheel hatch
     - name: Set up pre-commit cache
       uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84   # v3.3.2
       with:

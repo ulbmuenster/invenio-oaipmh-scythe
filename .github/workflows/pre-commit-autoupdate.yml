@@ -28,7 +28,7 @@ jobs:
       with:
         python-version: '3.12'
         cache: pip
-    - run: python -m pip install pre-commit
+    - run: python -m pip install --constraint=.github/workflows/constraints.txt pre-commit
     - run: pre-commit autoupdate --freeze > autoupdate.log
     - name: Prepare message for pr body
       run: |
