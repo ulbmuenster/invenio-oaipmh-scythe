@@ -111,9 +111,9 @@ all = [
 [tool.hatch.envs.docs]
 features = ["docs"]
 [tool.hatch.envs.docs.scripts]
-build = "mkdocs build --verbose"
-serve = "mkdocs serve --verbose"
-deploy = "mkdocs gh-deploy --force --verbose"
+build = "mkdocs build --config-file=docs/mkdocs.yml"
+serve = "mkdocs serve --config-file=docs/mkdocs.yml"
+deploy = "mkdocs gh-deploy --force --config-file=docs/mkdocs.yml"
 
 # black
 # Ref: https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file

@@ -7,9 +7,10 @@ site_description: oaipmh-scythe
 repo_name: afuetterer/oaipmh-scythe
 repo_url: https://github.com/afuetterer/oaipmh-scythe
 watch:
-- README.md
-- docs
-- src
+- ../README.md
+- ../src
+docs_dir: .
+site_dir: ../site
 
 nav:
 - Home: index.md
