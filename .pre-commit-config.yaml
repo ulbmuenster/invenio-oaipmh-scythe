@@ -2,6 +2,13 @@
 # Ref: https://pre-commit.com/#usage
 # ------------------------------------------------------------------------------
 
+# Ref: https://pre-commit.ci/#configuration
+ci:
+  autofix_prs: false
+  autoupdate_commit_msg: 'build: update pre-commit hooks'
+  autoupdate_schedule: weekly
+  skip: [licensecheck]
+
 repos:
   # Ref: https://pre-commit.com/#meta-hooks
 - repo: meta
