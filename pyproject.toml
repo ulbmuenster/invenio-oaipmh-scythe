@@ -84,6 +84,7 @@ packages = ["src/oaipmh_scythe"]
 path = "src/oaipmh_scythe/__init__.py"
 
 [tool.hatch.envs.default]
+python = "3.12"
 features = [
   "test",
 ]
