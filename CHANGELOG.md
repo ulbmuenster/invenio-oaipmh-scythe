@@ -6,8 +6,27 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit guidelines.
 
 
-## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.8.0...main)
+## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.9.0...main)
 
+
+## [0.9.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.8.0...0.9.0) (2023-11-18)
+
+### Features
+
+- add context manager to scythe class (#144) ([`d660f77`](https://github.com/afuetterer/oaipmh-scythe/commit/d660f77715b35a847828929b63373f9a759d5a59))
+
+### Performance improvements
+
+- set up internal httpx.Client (#140) ([`969e868`](https://github.com/afuetterer/oaipmh-scythe/commit/969e868ab844be62db0fadef2326aa51d6682a58))
+
+### Documentation
+
+- **readme:** add similar projects section ([`f45781f`](https://github.com/afuetterer/oaipmh-scythe/commit/f45781f405b5122507ef92d0f0e679c7709d5bc8))
+- **readme:** add acknowledgments section ([`20ecd64`](https://github.com/afuetterer/oaipmh-scythe/commit/20ecd641831a7a4dcd457726490c5c5591d022a1))
+- **readme:** add short descriptions of requirements ([`a573150`](https://github.com/afuetterer/oaipmh-scythe/commit/a573150ff8d16c14c2d4271b912387172f0225cd))
+- remove outdated credits page ([`47c80e8`](https://github.com/afuetterer/oaipmh-scythe/commit/47c80e8fbd99281193a175dcd2c905a1ff0bfb8b))
+- rename api docs page to client ([`cf77d57`](https://github.com/afuetterer/oaipmh-scythe/commit/cf77d5757e1a8a4ddfecb3c22fba01dfddf3bd79))
+- change breaking changes heading (#138) ([`69a8572`](https://github.com/afuetterer/oaipmh-scythe/commit/69a8572345a2f582ad6ec01a434df5dfc327f037))
 
 ## [0.8.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.7.0...0.8.0) (2023-11-16)
 
