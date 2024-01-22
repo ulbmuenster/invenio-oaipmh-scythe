@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit guidelines.
 
 
-## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.9.0...main)
+## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.10.0...main)
 
 
 ## [0.9.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.8.0...0.9.0) (2023-11-18)
@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - remove outdated credits page ([`47c80e8`](https://github.com/afuetterer/oaipmh-scythe/commit/47c80e8fbd99281193a175dcd2c905a1ff0bfb8b))
 - rename api docs page to client ([`cf77d57`](https://github.com/afuetterer/oaipmh-scythe/commit/cf77d5757e1a8a4ddfecb3c22fba01dfddf3bd79))
 - change breaking changes heading (#138) ([`69a8572`](https://github.com/afuetterer/oaipmh-scythe/commit/69a8572345a2f582ad6ec01a434df5dfc327f037))
+
 
 ## [0.8.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.7.0...0.8.0) (2023-11-16)
 
