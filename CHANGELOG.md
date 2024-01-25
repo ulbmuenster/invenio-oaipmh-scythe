@@ -6,7 +6,24 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit guidelines.
 
 
-## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.10.0...main)
+## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.11.0...main)
+
+
+
+## [0.11.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.10.0...0.11.0) (2024-01-25)
+
+### Features
+
+- set up logging of http requests (#250) ([`3df5ba1`](https://github.com/afuetterer/oaipmh-scythe/commit/3df5ba1c3247b38bc8fa0414b070296fc309a5ef))
+
+### Documentation
+
+- update python version in contributor guide (#248) ([`81366d8`](https://github.com/afuetterer/oaipmh-scythe/commit/81366d8ffa25eceec5c18fa487a4705ccbb58d6a))
+- **readme:** add pypi downloads badge to readme (#243) ([`1f87b18`](https://github.com/afuetterer/oaipmh-scythe/commit/1f87b18913f4ffc3c97303f41b577f402eabece7))
+- add initial citation.cff (#240) ([`135a433`](https://github.com/afuetterer/oaipmh-scythe/commit/135a4332bd7f0d0ae79406990a6d2e095618dd4f))
+- **readme:** add pypi package information to readme (#237) ([`ada4dcf`](https://github.com/afuetterer/oaipmh-scythe/commit/ada4dcfc84b1a7591098fb343f30815aa7efa7e6))
+- **readme:** add minor improvements to readme (#234) ([`9871491`](https://github.com/afuetterer/oaipmh-scythe/commit/9871491c065d9b98c06c71f83df7ae3e1fed2fa0))
+- make urls in docstrings clickable (#233) ([`55bf699`](https://github.com/afuetterer/oaipmh-scythe/commit/55bf699998483e6b43908242bc59dc7834bcb977))
 
 
 ## [0.10.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.9.0...0.10.0) (2024-01-22)
@@ -35,6 +52,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - **readme:** rephrase introduction about fork (#202) ([`de65418`](https://github.com/afuetterer/oaipmh-scythe/commit/de654186aefbdbb075a64ad1986f9f489cd6e9a0))
 - add more alternatives (#192) ([`5062a38`](https://github.com/afuetterer/oaipmh-scythe/commit/5062a3887fe5c72c44c918dab8d5ccc3e534e8e8))
 - add full changelog to release notes (#149) ([`19a98f5`](https://github.com/afuetterer/oaipmh-scythe/commit/19a98f5e498016989e506bfa29384143dfc3c781))
+
 
 ## [0.9.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.8.0...0.9.0) (2023-11-18)
 
