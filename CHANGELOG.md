@@ -6,8 +6,24 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit guidelines.
 
 
-## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.11.0...main)
+## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.12.0...main)
 
+
+
+## [0.12.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.11.0...0.12.0) (2024-04-04)
+
+### Features
+
+- **client:** add authentication parameter (#316) ([`035c0fe`](https://github.com/afuetterer/oaipmh-scythe/commit/035c0fe4af20c1a749ce3dc02d1f5174aa13c57c))
+
+### Documentation
+
+- **readme:** add download badges to readme (#294) ([`c375ea9`](https://github.com/afuetterer/oaipmh-scythe/commit/c375ea935e226b3fc8a16ae9e2e023b7713c32b5))
+- add pypi project version to release notes template (#282) ([`c9d37ea`](https://github.com/afuetterer/oaipmh-scythe/commit/c9d37ea6e698f2706ac6cf893e9e97f4f2cd1c3c))
+- update environment section in bug report template (#281) ([`a2c225a`](https://github.com/afuetterer/oaipmh-scythe/commit/a2c225a3fc38ada61386a6abd8310bec79c6e482))
+- add ci to types of changes in pr template (#272) ([`f2745e7`](https://github.com/afuetterer/oaipmh-scythe/commit/f2745e74eaf2714eee8b6133924d15b050cc9ac9))
+- rename code of conduct (#270) ([`1994bf3`](https://github.com/afuetterer/oaipmh-scythe/commit/1994bf39cf76321dad509c189d1b7757f7bd21fb))
+- add license headers to documentation (#258) ([`63aa318`](https://github.com/afuetterer/oaipmh-scythe/commit/63aa318d94607571e4852315c310c71593257791))
 
 
 ## [0.11.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.10.0...0.11.0) (2024-01-25)
