@@ -6,8 +6,26 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit guidelines.
 
 
-## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.12.0...main)
+## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.12.1...main)
 
+
+
+## [0.12.1](https://github.com/afuetterer/oaipmh-scythe/compare/0.12.0...0.12.1) (2024-04-25)
+
+### Bug Fixes
+
+- **exceptions:** rename nometadataformat to nometadataformats (#349) ([`255acb2`](https://github.com/afuetterer/oaipmh-scythe/commit/255acb257a35533e78b0eb1aed85704c386e4e0a))
+
+### Code Refactoring
+
+- make all exceptions available in the main init file (#348) ([`bad60ff`](https://github.com/afuetterer/oaipmh-scythe/commit/bad60ff61f6a8ceb96134e97e321eca93cbc6eab))
+- **client:** set up explicit default encoding in httpx.Client (#330) ([`25ef4cb`](https://github.com/afuetterer/oaipmh-scythe/commit/25ef4cbde2488426b7736e1240b5de798bd6fe34))
+- **iterator:** rename params argument to query in itemiterator (#329) ([`1de6cd5`](https://github.com/afuetterer/oaipmh-scythe/commit/1de6cd57efbf64dc44762243024b1b81bdcaac32))
+
+### Documentation
+
+- add api reference pages for all modules (#344) ([`8578031`](https://github.com/afuetterer/oaipmh-scythe/commit/8578031a21fd35ae7f8e0cd66fc955b8cc84bea0))
+- add python standard library inventory (#338) ([`20d176c`](https://github.com/afuetterer/oaipmh-scythe/commit/20d176cc1bbf00e40f19c836681d3bb6b46f5390))
 
 
 ## [0.12.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.11.0...0.12.0) (2024-04-04)
