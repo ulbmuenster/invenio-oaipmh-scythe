@@ -6,8 +6,21 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit guidelines.
 
 
-## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.12.1...main)
+## [Unreleased](https://github.com/afuetterer/oaipmh-scythe/compare/0.13.0...main)
 
+
+
+## [0.13.0](https://github.com/afuetterer/oaipmh-scythe/compare/0.12.1...0.13.0) (2024-05-07)
+
+### Features
+
+- **client:** make numeric arguments accept &#39;int | float&#39; (#366) ([`b53bbed`](https://github.com/afuetterer/oaipmh-scythe/commit/b53bbed65440f974b6c09b161a66a303fb57c3bd))
+
+### Documentation
+
+- **readme:** add codeql badge (#365) ([`eca3e3b`](https://github.com/afuetterer/oaipmh-scythe/commit/eca3e3b221bebdb47d72112c0e5f529298eadf77))
+- **tutorial:** fix typo (#353) ([`65f75b8`](https://github.com/afuetterer/oaipmh-scythe/commit/65f75b82515cc772d82cf745b8763cb291d3ff2a))
+- add references to exceptions in docstrings (#351) ([`4df8491`](https://github.com/afuetterer/oaipmh-scythe/commit/4df8491502bc65ae0589c6686b71756d205f4411))
 
 
 ## [0.12.1](https://github.com/afuetterer/oaipmh-scythe/compare/0.12.0...0.12.1) (2024-04-25)
