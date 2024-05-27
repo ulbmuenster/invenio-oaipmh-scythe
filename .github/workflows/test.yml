@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12']
+        python-version: ['3.9', '3.12']
     steps:
     - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
     - name: Set up Python ${{ matrix.python-version }}
@@ -70,7 +70,7 @@ jobs:
         python-version: '3.12'
         cache: pip
     - run: python -Im pip install --editable .[dev]
-    - run: python -Ic 'import oaipmh_scythe.__about__; print(oaipmh_scythe.__about__.__version__)'
+    - run: python -Ic 'import invenio_oaipmh_scythe.__about__; print(invenio_oaipmh_scythe.__about__.__version__)'
     - name: Set up pipdeptree
       if: matrix.os == 'ubuntu-latest'
       run: python -m pip install --require-hashes --requirement=.github/requirements/ci.txt

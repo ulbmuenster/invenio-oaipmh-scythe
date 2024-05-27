@@ -15,7 +15,7 @@ In case you want to harvest these more complex formats, you have to write your o
 default implementation that unpacks the metadata XML:
 
 ```python
-from oaipmh_scythe.models import Record
+from invenio_oaipmh_scythe.models import Record
 
 
 class MyRecord(Record):

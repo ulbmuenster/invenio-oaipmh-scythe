@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING
 import pytest
 from lxml import etree
 
-from oaipmh_scythe.response import OAIResponse
+from invenio_oaipmh_scythe.response import OAIResponse
 
 if TYPE_CHECKING:
     from pytest_mock import MockerFixture

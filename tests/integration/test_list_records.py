@@ -11,12 +11,12 @@ import httpx
 import pytest
 from lxml import etree
 
-from oaipmh_scythe.iterator import OAIResponseIterator
-from oaipmh_scythe.models import Record
-from oaipmh_scythe.response import OAIResponse
+from invenio_oaipmh_scythe.iterator import OAIResponseIterator
+from invenio_oaipmh_scythe.models import Record
+from invenio_oaipmh_scythe.response import OAIResponse
 
 if TYPE_CHECKING:
-    from oaipmh_scythe import Scythe
+    from invenio_oaipmh_scythe import Scythe
 
 TITLE_1 = "Some Remarkable Oxidation-Products of Benzidine"
 TITLE_2 = "Déclaration N°9 de La Nouvelle Donne: Tel est pris qui croyait prendre…"  # spellchecker:disable-line

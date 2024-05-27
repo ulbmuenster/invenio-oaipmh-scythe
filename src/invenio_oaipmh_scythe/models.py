@@ -26,12 +26,12 @@ from typing import TYPE_CHECKING
 
 from lxml import etree
 
-from oaipmh_scythe.utils import get_namespace, xml_to_dict
+from invenio_oaipmh_scythe.utils import get_namespace, xml_to_dict
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
 
-    from oaipmh_scythe.response import OAIResponse
+    from invenio_oaipmh_scythe.response import OAIResponse
 
 
 @dataclass

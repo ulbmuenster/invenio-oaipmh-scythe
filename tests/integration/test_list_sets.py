@@ -10,10 +10,10 @@ from typing import TYPE_CHECKING
 import pytest
 from httpx import HTTPStatusError
 
-from oaipmh_scythe.models import Set
+from invenio_oaipmh_scythe.models import Set
 
 if TYPE_CHECKING:
-    from oaipmh_scythe import Scythe
+    from invenio_oaipmh_scythe import Scythe
 
 
 @pytest.mark.default_cassette("list_sets.yaml")

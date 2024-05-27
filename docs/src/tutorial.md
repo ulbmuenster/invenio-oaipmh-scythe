@@ -14,7 +14,7 @@ This section gives a brief overview on how to use oaipmh-scythe for querying OAI
 To make a connection to an OAI-PMH interface, you need to import the Scythe class:
 
 ```python
-from oaipmh_scythe import Scythe
+from invenio_oaipmh_scythe import Scythe
 ```
 
 We initialize the connection by passing it the base URL. In our example, we use the OAI-PMH interface of
@@ -262,7 +262,7 @@ XML response returned by the server, you have to pass the
 [Scythe][oaipmh_scythe.client.Scythe] object:
 
 ```python
-from oaipmh_scythe.iterator import OAIResponseIterator
+from invenio_oaipmh_scythe.iterator import OAIResponseIterator
 
 scythe = Scythe("https://zenodo.org/oai2d", iterator=OAIResponseIterator)
 responses = scythe.list_records()

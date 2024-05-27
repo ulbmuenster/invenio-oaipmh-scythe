@@ -6,7 +6,7 @@
 import pytest
 from lxml import etree
 
-from oaipmh_scythe.utils import filter_dict_except_resumption_token, get_namespace, remove_none_values, xml_to_dict
+from invenio_oaipmh_scythe.utils import filter_dict_except_resumption_token, get_namespace, remove_none_values, xml_to_dict
 
 
 @pytest.fixture()

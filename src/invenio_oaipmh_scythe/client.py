@@ -19,15 +19,16 @@ from typing import TYPE_CHECKING
 
 import httpx
 
-from oaipmh_scythe.__about__ import __version__
-from oaipmh_scythe.iterator import BaseOAIIterator, OAIItemIterator
-from oaipmh_scythe.models import Header, Identify, MetadataFormat, OAIItem, Record, Set
-from oaipmh_scythe.response import OAIResponse
-from oaipmh_scythe.utils import filter_dict_except_resumption_token, log_response, remove_none_values
+from invenio_oaipmh_scythe.__about__ import __version__
+from invenio_oaipmh_scythe.iterator import BaseOAIIterator, OAIItemIterator
+from invenio_oaipmh_scythe.models import Header, Identify, MetadataFormat, OAIItem, Record, Set
+from invenio_oaipmh_scythe.response import OAIResponse
+from invenio_oaipmh_scythe.utils import filter_dict_except_resumption_token, log_response, remove_none_values
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable, Iterator
+    from collections.abc import Iterator
     from types import TracebackType
+    from typing import Iterable
 
     from httpx._types import AuthTypes
 
