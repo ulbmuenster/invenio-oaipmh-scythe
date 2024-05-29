@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 [project]
-name = "invenio-oaipmh-scythe"
+name = "oaipmh-scythe"
 description = "A Scythe for harvesting OAI-PMH repositories."
 readme = "README.md"
 keywords = [
@@ -76,10 +76,10 @@ include = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/invenio_oaipmh_scythe"]
+packages = ["src/oaipmh_scythe"]
 
 [tool.hatch.version]
-path = "src/invenio_oaipmh_scythe/__about__.py"
+path = "src/oaipmh_scythe/__about__.py"
 
 [tool.hatch.envs.default]
 installer = "uv"
@@ -148,14 +148,14 @@ ignore = [
 unfixable = [
   "F401", # unused-import
 ]
-isort.known-first-party = ["invenio_oaipmh_scythe"]
+isort.known-first-party = ["oaipmh_scythe"]
 pydocstyle.convention = "google"
 
 [tool.ruff.lint.per-file-ignores]
-"src/invenio_oaipmh_scythe/__about__.py" = [
+"src/oaipmh_scythe/__about__.py" = [
   "D100", # undocumented-public-module
 ]
-"src/invenio_oaipmh_scythe/client.py" = [
+"src/oaipmh_scythe/client.py" = [
   "PLR0913", # too-many-arguments
 ]
 "tests/*" = [
@@ -198,7 +198,7 @@ testpaths = "tests"
 [tool.coverage.run]
 branch = true
 parallel = true
-source = ["invenio_oaipmh_scythe"]
+source = ["oaipmh_scythe"]
 omit = [
   "__about__.py",
 ]
