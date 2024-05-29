@@ -21,15 +21,15 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
-from invenio_oaipmh_scythe import exceptions
-from invenio_oaipmh_scythe.models import ResumptionToken
+from oaipmh_scythe import exceptions
+from oaipmh_scythe.models import ResumptionToken
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
 
-    from invenio_oaipmh_scythe import Scythe
-    from invenio_oaipmh_scythe.models import OAIItem
-    from invenio_oaipmh_scythe.response import OAIResponse
+    from oaipmh_scythe import Scythe
+    from oaipmh_scythe.models import OAIItem
+    from oaipmh_scythe.response import OAIResponse
 
 VERBS_ELEMENTS: dict[str, str] = {
     "GetRecord": "record",

@@ -6,9 +6,9 @@ from __future__ import annotations
 
 import pytest
 
-from invenio_oaipmh_scythe import OAIResponse, Scythe
-from invenio_oaipmh_scythe.iterator import OAIItemIterator, OAIResponseIterator
-from invenio_oaipmh_scythe.models import Header
+from oaipmh_scythe import OAIResponse, Scythe
+from oaipmh_scythe.iterator import OAIItemIterator, OAIResponseIterator
+from oaipmh_scythe.models import Header
 
 query = {"verb": "ListIdentifiers", "metadataPrefix": "oai_dc"}
 

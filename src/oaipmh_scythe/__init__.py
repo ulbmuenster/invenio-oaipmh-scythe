@@ -5,8 +5,8 @@
 
 """oaipmh-scythe: A Scythe for harvesting OAI-PMH repositories."""
 
-from invenio_oaipmh_scythe.client import Scythe
-from invenio_oaipmh_scythe.exceptions import (
+from oaipmh_scythe.client import Scythe
+from oaipmh_scythe.exceptions import (
     BadArgument,
     BadResumptionToken,
     BadVerb,
@@ -18,7 +18,7 @@ from invenio_oaipmh_scythe.exceptions import (
     NoSetHierarchy,
     OAIPMHException,
 )
-from invenio_oaipmh_scythe.response import OAIResponse
+from oaipmh_scythe.response import OAIResponse
 
 __all__ = [
     "BadArgument",

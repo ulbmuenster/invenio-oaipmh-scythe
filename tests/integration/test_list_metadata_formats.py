@@ -10,10 +10,10 @@ from typing import TYPE_CHECKING
 import pytest
 from httpx import HTTPStatusError
 
-from invenio_oaipmh_scythe.models import MetadataFormat
+from oaipmh_scythe.models import MetadataFormat
 
 if TYPE_CHECKING:
-    from invenio_oaipmh_scythe import Scythe
+    from oaipmh_scythe import Scythe
 
 
 @pytest.mark.default_cassette("list_metadata_formats.yaml")

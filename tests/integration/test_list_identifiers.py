@@ -10,9 +10,9 @@ import httpx
 import pytest
 from lxml import etree
 
-from invenio_oaipmh_scythe import OAIResponse, Scythe
-from invenio_oaipmh_scythe.iterator import OAIResponseIterator
-from invenio_oaipmh_scythe.models import Header
+from oaipmh_scythe import OAIResponse, Scythe
+from oaipmh_scythe.iterator import OAIResponseIterator
+from oaipmh_scythe.models import Header
 
 
 @pytest.mark.default_cassette("list_identifiers.yaml")

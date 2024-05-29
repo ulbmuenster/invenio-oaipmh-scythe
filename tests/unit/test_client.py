@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING
 import httpx
 import pytest
 
-from invenio_oaipmh_scythe import Scythe
+from oaipmh_scythe import Scythe
 
 if TYPE_CHECKING:
     from respx.router import MockRouter

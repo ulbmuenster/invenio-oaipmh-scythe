@@ -7,8 +7,8 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from invenio_oaipmh_scythe import Scythe
-from invenio_oaipmh_scythe.models import Identify
+from oaipmh_scythe import Scythe
+from oaipmh_scythe.models import Identify
 
 
 @pytest.mark.default_cassette("identify.yaml")

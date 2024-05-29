@@ -13,7 +13,7 @@ Welcome to `oaipmh-scythe`, an updated and modernized version of the original
 written in Python. It has been designed for conveniently retrieving data from OAI interfaces the Pythonic way:
 
 ```python
-from invenio_oaipmh_scythe import Scythe
+from oaipmh_scythe import Scythe
 
 with Scythe("https://zenodo.org/oai2d") as scythe:
   records = scythe.list_records()

@@ -9,10 +9,10 @@ from typing import TYPE_CHECKING
 import pytest
 from httpx import HTTPStatusError
 
-from invenio_oaipmh_scythe.models import Record
+from oaipmh_scythe.models import Record
 
 if TYPE_CHECKING:
-    from invenio_oaipmh_scythe import Scythe
+    from oaipmh_scythe import Scythe
 
 IDENTIFIER = "oai:zenodo.org:10357859"
 TITLE = "Research Data Management Organiser (RDMO)"

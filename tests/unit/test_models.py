@@ -5,8 +5,8 @@
 import pytest
 from lxml import etree
 
-from invenio_oaipmh_scythe import OAIResponse
-from invenio_oaipmh_scythe.models import Header, Identify, MetadataFormat, Record, ResumptionToken, Set
+from oaipmh_scythe import OAIResponse
+from oaipmh_scythe.models import Header, Identify, MetadataFormat, Record, ResumptionToken, Set
 
 
 def test_resumption_token_repr() -> None:

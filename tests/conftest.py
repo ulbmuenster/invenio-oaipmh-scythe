@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import pytest
 
-from invenio_oaipmh_scythe import Scythe
+from oaipmh_scythe import Scythe
 
 
 @pytest.fixture(scope="session")
