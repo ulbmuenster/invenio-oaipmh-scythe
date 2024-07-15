@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 [project]
-name = "oaipmh-scythe"
+name = "invenio-oaipmh-scythe"
 description = "A Scythe for harvesting OAI-PMH repositories."
 readme = "README.md"
 keywords = [
